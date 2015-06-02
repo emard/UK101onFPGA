@@ -1,3 +1,21 @@
+-- Copyright of the original ROM contents respectfully acknowleged
+
+-- This file was created and maintaned by Grant Searle 2014
+-- You are free to use this file in your own projects but must never charge for it nor use it without
+-- acknowledgement.
+-- Please ask permission from Grant Searle before republishing elsewhere.
+-- If you use this file or any part of it, please add an acknowledgement to myself and
+-- a link back to my main web site http://searle.hostei.com/grant/    
+-- and to the UK101 page at http://searle.hostei.com/grant/uk101FPGA/index.html
+--
+-- Please check on the above web pages to see if there are any updates before using this file.
+-- If for some reason the page is no longer available, please search for "Grant Searle"
+-- on the internet to see if I have moved to another web hosting service.
+--
+-- Grant Searle
+-- eMail address available on my main web page link above.
+
+
 library ieee;
 	use ieee.std_logic_1164.all;
 	use ieee.numeric_std.all;
