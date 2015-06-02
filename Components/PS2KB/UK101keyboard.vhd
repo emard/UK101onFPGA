@@ -1,3 +1,23 @@
+-- This file was created and maintaned by Grant Searle 2014
+-- You are free to use this file in your own projects but must never charge for it nor use it without
+-- acknowledgement.
+-- Please ask permission from Grant Searle before republishing elsewhere.
+-- If you use this file or any part of it, please add an acknowledgement to myself and
+-- a link back to my main web site http://searle.hostei.com/grant/    
+-- and to the UK101 page at http://searle.hostei.com/grant/uk101FPGA/index.html
+--
+-- Please check on the above web pages to see if there are any updates before using this file.
+-- If for some reason the page is no longer available, please search for "Grant Searle"
+-- on the internet to see if I have moved to another web hosting service.
+--
+-- Grant Searle
+-- eMail address available on my main web page link above.
+
+-- Adapted from a creation by Mike Stirling.
+-- Modifications are copyright by Grant Searle 2014.
+
+-- Original copyright message shown below:
+
 -- ZX Spectrum for Altera DE1
 --
 -- Copyright (c) 2009-2011 Mike Stirling
@@ -52,7 +72,12 @@ port (
 	-- select bus
 	A			:	in	std_logic_vector(7 downto 0);
 	-- matrix return
-	KEYB		:	out	std_logic_vector(7 downto 0)
+	KEYB		:	out	std_logic_vector(7 downto 0);
+	
+	-- miscellaneous
+	-- FN keys passed out as general signals (momentary and toggled versions)
+	FNkeys	: out std_logic_vector(12 downto 0);
+	FNtoggledKeys	: out std_logic_vector(12 downto 0)
 	);
 end UK101keyboard;
 
@@ -88,6 +113,10 @@ signal keys		:	key_matrix;
 signal release	:	std_logic;
 signal extended	:	std_logic;
 signal shiftPressed : std_logic;
+
+signal FNkeysSig	: std_logic_vector(12 downto 0) := (others => '0');
+signal FNtoggledKeysSig	: std_logic_vector(12 downto 0) := (others => '0');
+
 begin	
 
 	ps2 : ps2_intf port map (
@@ -97,7 +126,10 @@ begin
 		);
 
 	shiftPressed <= keys(0)(2) or keys(0)(1);
-		
+	
+	FNkeys <= FNkeysSig;
+	FNtoggledKeys <= FNtoggledKeysSig;
+	
 	-- Output addressed matrix row/col
 	-- Original monitor scans for more than one row at a time, so more than one address may be low !
 	KEYB(0) <= (keys(0)(0) or A(0)) and (keys(1)(0) or A(1)) and (keys(2)(0) or A(2)) and (keys(3)(0) or A(3)) and (keys(4)(0) or A(4)) and (keys(5)(0) or A(5)) and (keys(6)(0) or A(6)) and (keys(7)(0) or A(7));
@@ -124,7 +156,7 @@ begin
 		if nRESET = '0' then
 			release <= '0';
 			extended <= '0';
-			
+	
 			keys(0) <= "11111110";
 			keys(1) <= (others => '1');
 			keys(2) <= (others => '1');
@@ -211,6 +243,68 @@ begin
 --					when X"76" => keys(0)(0) <= release; -- Escape
 					when X"29" => keys(1)(4) <= release; -- SPACE
 					when X"14" => keys(0)(6) <= release; -- CTRL
+
+					when X"05" => --F1 
+					FNkeysSig(1) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(1) <= not FNtoggledKeysSig(1);
+					end if;
+					when X"06" => --F2 
+					FNkeysSig(2) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(2) <= not FNtoggledKeysSig(2);
+					end if;
+					when X"04" => --F3 
+					FNkeysSig(3) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(3) <= not FNtoggledKeysSig(3);
+					end if;
+					when X"0C" => --F4 
+					FNkeysSig(4) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(4) <= not FNtoggledKeysSig(4);
+					end if;
+					when X"03" => --F5 
+					FNkeysSig(5) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(5) <= not FNtoggledKeysSig(5);
+					end if;
+					when X"0B" => --F6 
+					FNkeysSig(6) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(6) <= not FNtoggledKeysSig(6);
+					end if;
+					when X"83" => --F7 
+					FNkeysSig(7) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(7) <= not FNtoggledKeysSig(7);
+					end if;
+					when X"0A" => --F8 
+					FNkeysSig(8) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(8) <= not FNtoggledKeysSig(8);
+					end if;
+					when X"01" => --F9 
+					FNkeysSig(9) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(9) <= not FNtoggledKeysSig(9);
+					end if;
+					when X"09" => --F10 
+					FNkeysSig(10) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(10) <= not FNtoggledKeysSig(10);
+					end if;
+					when X"78" => --F11
+					FNkeysSig(11) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(11) <= not FNtoggledKeysSig(11);
+					end if;
+					when X"07" => --F12 
+					FNkeysSig(12) <= release;
+					if release = '0' then
+						FNtoggledKeysSig(12) <= not FNtoggledKeysSig(12);
+					end if;
+
 					
 					-- Cursor keys - these are actually extended (E0 xx), but
 					-- the scancodes for the numeric keypad cursor keys are
