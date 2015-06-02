@@ -1,0 +1,52 @@
+
+# leave empty line above
+# pin assignments for the TB276
+# keys have inverted logic: 1 when idle, 0 when pressed
+#set_location_assignment PIN_25 -to clk_25MHz
+#set_location_assignment PIN_73 -to key[1]
+#set_location_assignment PIN_73 -to btn_up
+#set_location_assignment PIN_74 -to key[0]
+#set_location_assignment PIN_74 -to btn_down
+set_location_assignment PIN_3 -to led[7]
+set_location_assignment PIN_2 -to led[6]
+set_location_assignment PIN_1 -to led[5]
+set_location_assignment PIN_144 -to led[4]
+set_location_assignment PIN_143 -to led[3]
+set_location_assignment PIN_142 -to led[2]
+set_location_assignment PIN_141 -to led[1]
+set_location_assignment PIN_138 -to led[0]
+#
+#set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to clk_25MHz
+#set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to key[1]
+#set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to key[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to led[0]
+
+#
+set_location_assignment PIN_25 -to clk_25MHz
+set_location_assignment PIN_74 -to n_reset
+set_location_assignment PIN_10 -to txd
+set_location_assignment PIN_28 -to rxd
+set_location_assignment PIN_11 -to rts
+set_location_assignment PIN_49 -to ps2Clk
+set_location_assignment PIN_42 -to ps2Data
+set_location_assignment PIN_33 -to video
+set_location_assignment PIN_38 -to videoSync
+# video     --- 470 ----\___ composite
+# videoSync --- 1k  ----/    output
+
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to n_reset
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to txd
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to rxd
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to rts
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to ps2Clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to ps2Data
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to video
+set_instance_assignment -name IO_STANDARD "3.3-V LVCMOS" -to videoSync
