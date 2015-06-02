@@ -69,8 +69,8 @@ set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED WITH WE
 set_location_assignment PIN_75 -to video
 set_location_assignment PIN_74 -to videoSync
 
-set_location_assignment PIN_89 -to ps2Data
-set_location_assignment PIN_90 -to ps2Clk
+set_location_assignment PIN_87 -to ps2Data
+set_location_assignment PIN_86 -to ps2Clk
 
 set_global_assignment -name VHDL_FILE MonUK02Rom.VHD
 set_global_assignment -name VHDL_FILE ../Components/TV/UK101TextDisplay.vhd
