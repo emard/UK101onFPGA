@@ -13,6 +13,9 @@
 -- Grant Searle
 -- eMail address available on my main web page link above.
 
+-- Emard
+-- buttons for C, ENTER
+
 -- Adapted from a creation by Mike Stirling.
 -- Modifications are copyright by Grant Searle 2014.
 
