@@ -3,6 +3,7 @@ BINARY=diamond/project/project_project.jed
 all: $(BINARY)
 
 $(BINARY):
+	./clean-lattice.sh
 	cd diamond; ./build.sh
 
 upload: program
@@ -17,6 +18,4 @@ copy: $(BINARY)
 	cp $(BINARY) blinkled_LFXP2-8E-5TN144C.jed
 
 clean:
-	./clean-lattice.sh
-	rm -f *~
-
+	rm -rf diamond *~
