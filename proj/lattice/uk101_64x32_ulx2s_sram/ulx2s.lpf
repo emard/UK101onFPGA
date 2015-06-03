@@ -284,6 +284,6 @@ IOBUF PORT "p_tip_3" DRIVE=20 PULLMODE=NONE;
 
 # PS/2 input pullup to remove noise
 # when no keyboard is connected
-#IOBUF PORT "pin_8" PULLMODE=UP;
-#IOBUF PORT "pin_9" PULLMODE=UP;
+IOBUF PORT "pin_8" PULLMODE=UP;
+IOBUF PORT "pin_9" PULLMODE=UP;
 IOBUF GROUP "free_pins" PULLMODE=UP;
