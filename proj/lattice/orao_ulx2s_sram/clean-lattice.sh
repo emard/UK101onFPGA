@@ -21,7 +21,7 @@ SYMLINK="${SYMLINK} \
   ../../../lattice/lattice_OraoCRT13.vhd \
   ../../../lattice/OraoCRT.vhd \
   ../../../lattice/main_orao.vhd \
-  ../../../UK101/orao.vhd \
+  ../../../orao/orao.vhd \
   ../../../Components/M6502/T65_ALU.vhd \
   ../../../Components/M6502/T65.vhd \
   ../../../Components/M6502/T65_MCode.vhd \
@@ -33,22 +33,6 @@ SYMLINK="${SYMLINK} \
   ../../../Components/PS2KB/orao_keyboard_buttons.vhd \
   ../../../Components/UART/bufferedUART.vhd \
   "
-
-#  ../../../lattice/ulx2s.lpf \
-
-#  RAM created on FPGA
-
-#  UK101/uk101.vhd \
-#  UK101/uk101_monitor_only.vhd \
-#  lattice/DisplayRam.vhd \
-#  lattice/ProgSRam_clocked.vhd \
-#  Components/TV/UK101TextDisplay.vhd \
-#  UK101/MonUK02Rom.vhd \
-#  UK101/BasicRom.vhd
-#  UK101/BASIC.HEX \
-#  UK101/ProgRam.vhd    UK101/DisplayRam.vhd \
-#  original keyboard, ps/2 only
-#  Components/PS2KB/UK101keyboard.vhd \
 
 echo "COPY=${COPY}"
 echo "SYMLINK=${SYMLINK}"
