@@ -100,3 +100,14 @@ http://www.osiweb.org/manuals/cegmon.pdf
 
 UK101 manual
 http://www.compukit.org/images/8/8e/Compukit-manual.pdf
+
+# Similar projects
+
+Orao Emulator (Perl)
+http://svn.rot13.org/index.cgi/VRac
+
+Orao Emulator (Pascal)
+http://www.deltasoft.com.hr/retro/oraoemu.htm
+
+Orao Emulator (SAM)
+https://github.com/simonowen/oraoemu
