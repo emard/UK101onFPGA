@@ -12,6 +12,8 @@
 --
 -- Grant Searle
 -- eMail address available on my main web page link above.
+--
+-- Emard modified original UK101 glue into Orao glue
 
 library ieee;
 use ieee.std_logic_1164.all;
