@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.0" title="project" device="LFXP2-8E-5TN144C" default_implementation="project">
+    <Options/>
+    <Implementation title="project" dir="project" description="project" synthesis="synplify" default_strategy="Strategy1">
+        <Source name="ulx2s.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
