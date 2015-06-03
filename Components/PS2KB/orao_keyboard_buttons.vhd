@@ -13,6 +13,9 @@
 -- Grant Searle
 -- eMail address available on my main web page link above.
 
+-- Emard
+-- buttons for B, C, ENTER
+
 -- Adapted from a creation by Mike Stirling.
 -- Modifications are copyright by Grant Searle 2014.
 
@@ -142,26 +145,29 @@ begin
 	-- key(x)(y) have inverted logic. 0 when key pressed
 	-- KEYB(0) <= (keys(1)(0) or A(1)) and (keys(2)(0) or A(2)) and (keys(3)(0) or A(3)) and (keys(4)(0) or A(4)) and (keys(5)(0) or A(5)) and (keys(6)(0) or A(6)) and (keys(7)(0) or A(7)) and (keys(8)(0) or A(8)) and (keys(9)(0) or A(9)) and (keys(10)(0) or A(10));
 	-- KEYB(1) <= (keys(1)(1) or A(1)) and (keys(2)(1) or A(2)) and (keys(3)(1) or A(3)) and (keys(4)(1) or A(4)) and (keys(5)(1) or A(5)) and (keys(6)(1) or A(6)) and (keys(7)(1) or A(7)) and (keys(8)(1) or A(8)) and (keys(9)(1) or A(9)) and (keys(10)(1) or A(10));
-	KEYB(0) <=  ((keys(1)(0) and not key_enter) or A(1)) 
-	        and  (keys(2)(0) or A(2)) 
-	        and  (keys(3)(0) or A(3)) 
-	        and  (keys(4)(0) or A(4)) 
-	        and  (keys(5)(0) or A(5)) 
-	        and  (keys(6)(0) or A(6)) 
-	        and  (keys(7)(0) or A(7)) 
-	        and ((not key_b) or A(8)) -- (keys(8)(0) or A(8)) 
-	        and  (keys(9)(0) or A(9)) 
-	        and (keys(10)(0) or A(10));
-	KEYB(1) <=  (keys(1)(1) or A(1)) 
-	       and  (keys(2)(1) or A(2)) 
-	       and  (keys(3)(1) or A(3)) 
-	       and  (keys(4)(1) or A(4)) 
-	       and  (keys(5)(1) or A(5)) 
-	       and  (keys(6)(1) or A(6)) 
-	       and ((not key_c) or A(7)) --  (keys(7)(1) or A(7))
-	       and  (keys(8)(1) or A(8)) 
-	       and  (keys(9)(1) or A(9)) 
-	       and (keys(10)(1) or A(10));
+	KEYB(0) <=   (keys(1)(0) or A(1))
+                and ((not key_enter) or A(1))
+                and  (keys(2)(0) or A(2)) 
+                and  (keys(3)(0) or A(3)) 
+                and  (keys(4)(0) or A(4)) 
+                and  (keys(5)(0) or A(5)) 
+                and  (keys(6)(0) or A(6)) 
+                and  (keys(7)(0) or A(7)) 
+                and  (keys(8)(0) or A(8)) 
+                and ((not key_b) or A(8))
+                and  (keys(9)(0) or A(9)) 
+                and  (keys(10)(0) or A(10));
+	KEYB(1) <=   (keys(1)(1) or A(1))
+                and  (keys(2)(1) or A(2))
+                and  (keys(3)(1) or A(3))
+                and  (keys(4)(1) or A(4))
+                and  (keys(5)(1) or A(5))
+                and  (keys(6)(1) or A(6))
+                and  (keys(7)(1) or A(7))
+                and ((not key_c) or A(7))
+                and  (keys(8)(1) or A(8))
+                and  (keys(9)(1) or A(9))
+                and  (keys(10)(1) or A(10));
 	KEYB(2) <= '1';
 	KEYB(3) <= '1';
 	-- KEYB(2) <= (keys(0)(2) or A(0)) and (keys(1)(2) or A(1)) and (keys(2)(2) or A(2)) and (keys(3)(2) or A(3)) and (keys(4)(2) or A(4)) and (keys(5)(2) or A(5)) and (keys(6)(2) or A(6)) and (keys(7)(2) or A(7));
