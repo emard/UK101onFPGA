@@ -18,3 +18,5 @@ copy: $(BINARY)
 
 clean:
 	./clean-lattice.sh
+	rm -f *~
+
