@@ -39,16 +39,16 @@ Prerequisite: Latice Diamond (I have 3.4)
 To enter BASIC:
 After reset it will prompt
 
-    CEGMON (D/C/W/M)
-
 Press C (right button)
 
 Press ENTER (middle button) twice
 
 On screen:
 
-    MEMORY SIZE?
-    TERMINAL WIDTH?
+    CEGMON (D/C/W/M) <press c>
+
+    MEMORY SIZE? <press enter>
+    TERMINAL WIDTH? <press enter>
     
     40191 BYTES FREE
     
@@ -77,13 +77,13 @@ Press B (left button)
 
 Press C (right button)
 
-Press ENTER (center button)
+Press ENTER twice (center button)
+
+It will start BASIC
 
 on screen:
 
     *BC_ <press enter>
-
-It will start BASIC
 
     >EAGLE< EXTENDED BASIC    
     V 1.0 (C) 85
