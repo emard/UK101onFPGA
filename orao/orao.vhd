@@ -80,7 +80,6 @@ architecture struct of orao is
 	signal serialClock	: std_logic;
 
 	signal kbReadData 	: std_logic_vector(7 downto 0);
-	signal kbRowSel 		: std_logic_vector(7 downto 0);
 	
 	signal uart_n_wr        : std_logic;
 	signal uart_n_rd        : std_logic;
@@ -92,14 +91,14 @@ begin
 
 	n_memWR <= not(cpuClock) nand (not n_WR);
 
-	--		0x0000, 0x03FF, 'nulti blok',
-	--		0x0400, 0x5FFF, 'korisnički RAM (23K)',
-	--		0x6000, 0x7FFF, 'video RAM',
-	--		0x8000, 0x9FFF, 'sistemske lokacije',
-	--		0xA000, 0xAFFF, 'ekstenzija',
-	--		0xB000, 0xBFFF, 'DOS',
-	--		0xC000, 0xDFFF, 'BASIC ROM',
-	--		0xE000, 0xFFFF, 'sistemski ROM',
+	-- 0x0000, 0x03FF, '0th block',
+	-- 0x0400, 0x5FFF, 'user RAM (23K)',
+	-- 0x6000, 0x7FFF, 'video RAM',
+	-- 0x8000, 0x9FFF, 'system locations (keyboard etc.)',
+	-- 0xA000, 0xAFFF, 'extension (maybe ROM cartridge)',
+	-- 0xB000, 0xBFFF, 'DOS',
+	-- 0xC000, 0xDFFF, 'BASIC ROM',
+	-- 0xE000, 0xFFFF, 'sisytem ROM',
 
 	n_dispRamCS <= '0' when cpuAddress(15 downto 13) = "011" else '1'; --8k
 	n_basRomCS <= '0' when cpuAddress(15 downto 13) = "110" else '1'; --8k
@@ -256,18 +255,6 @@ begin
 		q_b => dispRamDataOutB
 	);
 	
-	normal_keyboard: if onboard_buttons = '0' generate
-	u9 : entity work.UK101keyboard
-	port map(
-		CLK => clk,
-		nRESET => n_reset,
-		PS2_CLK	=> ps2Clk,
-		PS2_DATA => ps2Data,
-		A	=> kbRowSel,
-		KEYB	=> kbReadData
-	);
-	end generate;
-
 	buttons2keys: if onboard_buttons = '1' generate
 	u9 : entity work.orao_keyboard_buttons
 	port map(
@@ -282,12 +269,5 @@ begin
 		Q	  => kbReadData
 	);
 	end generate;
-	
-	process (n_kbCS,n_memWR)
-	begin
-		if	n_kbCS='0' and n_memWR = '0' then
-			kbRowSel <= cpuDataOut;
-		end if;
-	end process;
 	
 end;
