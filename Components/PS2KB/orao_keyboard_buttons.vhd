@@ -181,16 +181,6 @@ begin
         Q <= KEYB(7 downto 4) & x"0" when A(0) = '0' 
         else KEYB(3 downto 0) & x"0";
 
---	KEYB <= keys(0) when A(0) = '0' else
---		keys(1) when A(1) = '0' else
---		keys(2) when A(2) = '0' else
---		keys(3) when A(3) = '0' else
---		keys(4) when A(4) = '0' else
---		keys(5) when A(5) = '0' else
---		keys(6) when A(6) = '0' else
---		keys(7) when A(7) = '0' else
---		(others => '1');
-
 	process(nRESET,CLK)
 	begin
 		if nRESET = '0' then
@@ -221,9 +211,9 @@ begin
 					case keyb_data is					
 					
 --					when X"0e" => keys(0)(0) <= release; -- pipe
-					when X"16" => keys(7)(7) <= release; -- 1
-					when X"1e" => keys(7)(6) <= release; -- 2
-					when X"26" => keys(7)(5) <= release; -- 3
+					when X"16" => keys(5)(7) <= release; -- 1
+					when X"1e" => keys(5)(0) <= release; -- 2
+					when X"26" => keys(5)(1) <= release; -- 3
 					when X"25" => keys(7)(4) <= release; -- 4
 					when X"2e" => keys(7)(3) <= release; -- 5			
 					when X"36" => keys(7)(2) <= release; -- 6
