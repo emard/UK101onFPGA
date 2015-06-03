@@ -45,16 +45,25 @@ Press C (right button)
 
 Press ENTER (middle button) twice
 
-It will run RAM self-test and should report
+On screen:
 
+    MEMORY SIZE?
+    TERMINAL WIDTH?
+    
     40191 BYTES FREE
+    
+    C O M P U K I T  U K 1 0 1
+    
+    Personal computer
+    8K Basic Copyright1979
+    OK
 
 # ORAO 32K RAM 256x256 screen ULX2S Lattice XP2
 
 To compile ORAO with 32K RAM (BASIC reports 23K free) 
 and 8K graphics screen size of 256x256 pixels for ULX2S 
 board (Lattice XP2)
-Prerequisite: Latice Diamond (I have 3.4)
+Prerequisite: Lattice Diamond (I have 3.4)
 
     cd proj/lattice/orao_ulx2s_sram
     make
@@ -68,13 +77,18 @@ Press B (left button)
 
 Press C (right button)
 
-on screen:
-
-    *BC_
-
 Press ENTER (center button)
 
-It will run RAM self-test and should report
+on screen:
+
+    *BC_ <press enter>
+
+It will start BASIC
+
+    >EAGLE< EXTENDED BASIC    
+    V 1.0 (C) 85
+
+    MEM SIZE? <press enter>
 
     23534 BYTES FREE
 
