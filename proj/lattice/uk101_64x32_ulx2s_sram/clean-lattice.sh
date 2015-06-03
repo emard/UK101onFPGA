@@ -18,7 +18,7 @@ SYMLINK="${SYMLINK} \
   ../../../lattice/ProgSRam.vhd \
   ../../../lattice/lattice_BasicRom.vhd \
   ../../../lattice/BasicRom.vhd \
-  ../../../lattice/main_64x32_64K.vhd \
+  ../../../lattice/main_uk101_64x32_64K.vhd \
   ../../../UK101/CharRom.VHD \
   ../../../UK101/CegmonRom_64x32.vhd \
   ../../../UK101/uk101_cegmon_64x32.vhd \
