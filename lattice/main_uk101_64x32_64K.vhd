@@ -98,7 +98,7 @@ begin
 		ps2Clk    => pin_8,
 		ps2Data   => pin_9,
 		key_enter => btn_center,
-		key_c     => btn_up,
+		key_c     => btn_right,
                 sram_lbl  => sram_lbl,
                 sram_ubl  => sram_ubl,
                 sram_wel  => sram_wel,
