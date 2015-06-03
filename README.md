@@ -88,9 +88,10 @@ on screen:
     >EAGLE< EXTENDED BASIC    
     V 1.0 (C) 85
 
-    MEM SIZE? <press enter>
+    MEM SIZE? _ <press enter>
 
     23534 BYTES FREE
+    _
 
 # Online documentation
 
