@@ -37,10 +37,17 @@ Prerequisite: Latice Diamond (I have 3.4)
     make flash   # upload to config flash
 
 To enter BASIC:
-After reset it will prompt CEGMON (D/C/W/M)
+After reset it will prompt
+
+    CEGMON (D/C/W/M)
+
 Press C (right button)
+
 Press ENTER (middle button) twice
-It will run RAM self-test and should report 40191 bytes free.
+
+It will run RAM self-test and should report
+
+    40191 BYTES FREE
 
 # ORAO 32K RAM 256x256 screen ULX2S Lattice XP2
 
@@ -56,10 +63,20 @@ Prerequisite: Latice Diamond (I have 3.4)
 
 To enter BASIC
 After reset it will prompt *_ (underscore cursor blinking).
+
 Press B (left button)
+
 Press C (right button)
+
+on screen:
+
+    *BC_
+
 Press ENTER (center button)
-It will run RAM self-test and should report 23534 bytes free.
+
+It will run RAM self-test and should report
+
+    23534 BYTES FREE
 
 # Online documentation
 
