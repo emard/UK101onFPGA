@@ -143,38 +143,72 @@ begin
 	-- Output addressed matrix row/col
 	-- Original monitor scans for more than one row at a time, so more than one address may be low !
 	-- key(x)(y) have inverted logic. 0 when key pressed
-	-- KEYB(0) <= (keys(1)(0) or A(1)) and (keys(2)(0) or A(2)) and (keys(3)(0) or A(3)) and (keys(4)(0) or A(4)) and (keys(5)(0) or A(5)) and (keys(6)(0) or A(6)) and (keys(7)(0) or A(7)) and (keys(8)(0) or A(8)) and (keys(9)(0) or A(9)) and (keys(10)(0) or A(10));
-	-- KEYB(1) <= (keys(1)(1) or A(1)) and (keys(2)(1) or A(2)) and (keys(3)(1) or A(3)) and (keys(4)(1) or A(4)) and (keys(5)(1) or A(5)) and (keys(6)(1) or A(6)) and (keys(7)(1) or A(7)) and (keys(8)(1) or A(8)) and (keys(9)(1) or A(9)) and (keys(10)(1) or A(10));
-	KEYB(0) <=   (keys(1)(0) or A(1))
-                and ((not key_enter) or A(1))
-                and  (keys(2)(0) or A(2)) 
-                and  (keys(3)(0) or A(3)) 
-                and  (keys(4)(0) or A(4)) 
-                and  (keys(5)(0) or A(5)) 
-                and  (keys(6)(0) or A(6)) 
-                and  (keys(7)(0) or A(7)) 
-                and  (keys(8)(0) or A(8)) 
-                and ((not key_b) or A(8))
-                and  (keys(9)(0) or A(9)) 
-                and  (keys(10)(0) or A(10));
-	KEYB(1) <=   (keys(1)(1) or A(1))
-                and  (keys(2)(1) or A(2))
-                and  (keys(3)(1) or A(3))
-                and  (keys(4)(1) or A(4))
-                and  (keys(5)(1) or A(5))
-                and  (keys(6)(1) or A(6))
-                and  (keys(7)(1) or A(7))
-                and ((not key_c) or A(7))
-                and  (keys(8)(1) or A(8))
-                and  (keys(9)(1) or A(9))
-                and  (keys(10)(1) or A(10));
+	KEYB(0) <=  (keys( 1)(0) or A(1))
+               and ((not key_enter) or A(1)) 
+               and  (keys( 2)(0) or A(2))    
+               and  (keys( 3)(0) or A(3))    
+               and  (keys( 4)(0) or A(4))    
+               and  (keys( 5)(0) or A(5))    
+               and  (keys( 6)(0) or A(6))    
+               and  (keys( 7)(0) or A(7))    
+               and  (keys( 8)(0) or A(8))    
+               and ((not key_b) or A(8))     
+               and  (keys( 9)(0) or A(9))    
+               and  (keys(10)(0) or A(10));  
+	KEYB(1) <=   (keys( 1)(1) or A(1))
+               and  (keys( 2)(1) or A(2))  
+               and  (keys( 3)(1) or A(3))  
+               and  (keys( 4)(1) or A(4))  
+               and  (keys( 5)(1) or A(5))  
+               and  (keys( 6)(1) or A(6))  
+               and  (keys( 7)(1) or A(7))  
+               and ((not key_c) or A(7))   
+               and  (keys( 8)(1) or A(8))  
+               and  (keys( 9)(1) or A(9))  
+               and  (keys(10)(1) or A(10));
 	KEYB(2) <= '1';
 	KEYB(3) <= '1';
 
-	KEYB(4) <= (keys(1)(4) or A(1)) and (keys(2)(4) or A(2)) and (keys(3)(4) or A(3)) and (keys(4)(4) or A(4)) and (keys(5)(4) or A(5)) and (keys(6)(4) or A(6)) and (keys(7)(4) or A(7)) and (keys(8)(4) or A(8)) and (keys(9)(4) or A(9)) and (keys(10)(4) or A(10));
-	KEYB(5) <= (keys(1)(5) or A(1)) and (keys(2)(5) or A(2)) and (keys(3)(5) or A(3)) and (keys(4)(5) or A(4)) and (keys(5)(5) or A(5)) and (keys(6)(5) or A(6)) and (keys(7)(5) or A(7)) and (keys(8)(5) or A(8)) and (keys(9)(5) or A(9)) and (keys(10)(5) or A(10));
-	KEYB(6) <= (keys(1)(6) or A(1)) and (keys(2)(6) or A(2)) and (keys(3)(6) or A(3)) and (keys(4)(6) or A(4)) and (keys(5)(6) or A(5)) and (keys(6)(6) or A(6)) and (keys(7)(6) or A(7)) and (keys(8)(6) or A(8)) and (keys(9)(6) or A(9)) and (keys(10)(6) or A(10));
-	KEYB(7) <= (keys(1)(7) or A(1)) and (keys(2)(7) or A(2)) and (keys(3)(7) or A(3)) and (keys(4)(7) or A(4)) and (keys(5)(7) or A(5)) and (keys(6)(7) or A(6)) and (keys(7)(7) or A(7)) and (keys(8)(7) or A(8)) and (keys(9)(7) or A(9)) and (keys(10)(7) or A(10));
+	KEYB(4) <= (keys( 1)(4) or A(1)) 
+	       and (keys( 2)(4) or A(2)) 
+	       and (keys( 3)(4) or A(3)) 
+	       and (keys( 4)(4) or A(4)) 
+	       and (keys( 5)(4) or A(5)) 
+	       and (keys( 6)(4) or A(6)) 
+	       and (keys( 7)(4) or A(7)) 
+	       and (keys( 8)(4) or A(8)) 
+	       and (keys( 9)(4) or A(9)) 
+	       and (keys(10)(4) or A(10));
+	KEYB(5) <= (keys( 1)(5) or A(1)) 
+	       and (keys( 2)(5) or A(2)) 
+	       and (keys( 3)(5) or A(3)) 
+	       and (keys( 4)(5) or A(4)) 
+	       and (keys( 5)(5) or A(5)) 
+	       and (keys( 6)(5) or A(6)) 
+	       and (keys( 7)(5) or A(7)) 
+	       and (keys( 8)(5) or A(8)) 
+	       and (keys( 9)(5) or A(9)) 
+	       and (keys(10)(5) or A(10));
+	KEYB(6) <= (keys( 1)(6) or A(1)) 
+	       and (keys( 2)(6) or A(2)) 
+	       and (keys( 3)(6) or A(3)) 
+	       and (keys( 4)(6) or A(4)) 
+	       and (keys( 5)(6) or A(5)) 
+	       and (keys( 6)(6) or A(6)) 
+	       and (keys( 7)(6) or A(7)) 
+	       and (keys( 8)(6) or A(8)) 
+	       and (keys( 9)(6) or A(9)) 
+	       and (keys(10)(6) or A(10));
+	KEYB(7) <= (keys( 1)(7) or A(1)) 
+	       and (keys( 2)(7) or A(2)) 
+	       and (keys( 3)(7) or A(3)) 
+	       and (keys( 4)(7) or A(4)) 
+	       and (keys( 5)(7) or A(5)) 
+	       and (keys( 6)(7) or A(6)) 
+	       and (keys( 7)(7) or A(7)) 
+	       and (keys( 8)(7) or A(8)) 
+	       and (keys( 9)(7) or A(9)) 
+	       and (keys(10)(7) or A(10));
 
         Q <= KEYB(7 downto 4) & x"0" when A(0) = '0' 
         else KEYB(3 downto 0) & x"0";
@@ -192,6 +226,9 @@ begin
 			keys(5) <= (others => '1');
 			keys(6) <= (others => '1');
 			keys(7) <= (others => '1');
+			keys(8) <= (others => '1');
+			keys(9) <= (others => '1');
+			keys(10) <= (others => '1');
 		elsif rising_edge(CLK) then
 			if keyb_valid = '1' then
 				-- keyb_data contains scan code of PS/2 Set2
@@ -219,10 +256,10 @@ begin
 					when X"3d" => keys(4)(7) <= release; -- 7
 					when X"3e" => keys(4)(0) <= release; -- 8
 					when X"46" => keys(4)(1) <= release; -- 9
-					-- FPGA problem A10
-					--when X"45" => keys(10)(1) <= release; -- 0
-					--when X"55" => keys(10)(0) <= release; -- -
-					when X"66" => keys(1)(4) <= release; -- Backspace -> cursor left
+					when X"45" => keys(10)(1) <= release; -- 0
+					when X"4e" => keys(10)(0) <= release; -- -=
+					when X"55" => keys(10)(0) <= release; -- ;+
+					when X"66" => keys(1)(4) <= release; -- Backspace same as cursor left
 					
 --					when X"0d" => keys(0)(0) <= release; -- TAB not on ORAO
 					when X"15" => keys(5)(5) <= release; -- Q
@@ -234,40 +271,36 @@ begin
 					when X"3c" => keys(4)(6) <= release; -- U
 					when X"43" => keys(4)(5) <= release; -- I
 					when X"44" => keys(4)(4) <= release; -- O
-					-- fpga problem line A10
-					--when X"4d" => keys(10)(4) <= release; -- P
-					--when X"54" => keys(10)(6) <= release; -- [ sh
-					--when X"5b" => keys(10)(5) <= release; -- ] dj
+					when X"4d" => keys(10)(4) <= release; -- P
+					when X"54" => keys(10)(6) <= release; -- [ sh
+					when X"5b" => keys(10)(5) <= release; -- ] dj
 					when X"5a" => keys(1)(0) <= release; -- ENTER
 					
 					-- when X"58" => -- Caps Lock
 					when X"1c" => keys(7)(5) <= release; -- A
 					when X"1b" => keys(7)(6) <= release; -- S
 					when X"23" => keys(7)(4) <= release; -- D
-					-- FPGA problem line A8
-					--when X"2b" => keys(8)(4) <= release; -- F
-					--when X"34" => keys(8)(6) <= release; -- G
-					--when X"33" => keys(8)(5) <= release; -- H
+					when X"2b" => keys(8)(4) <= release; -- F
+					when X"34" => keys(8)(6) <= release; -- G
+					when X"33" => keys(8)(5) <= release; -- H
 					when X"3b" => keys(6)(5) <= release; -- J
 					when X"42" => keys(6)(6) <= release; -- K
 					when X"4b" => keys(6)(4) <= release; -- L
-					-- FPGA problem A9
-					--when X"4c" => keys(9)(4) <= release; -- Č
-					--when X"52" => keys(9)(5) <= release; -- Ć
-					--when X"5d" => keys(9)(6) <= release; -- Ž
+					when X"4c" => keys(9)(4) <= release; -- Č
+					when X"52" => keys(9)(5) <= release; -- Ć
+					when X"5d" => keys(9)(6) <= release; -- Ž
 
 					when X"12" => keys(2)(1) <= release; -- Left shift
 					when X"1a" => keys(7)(7) <= release; -- Z
 					when X"22" => keys(7)(0) <= release; -- X
 					when X"21" => keys(7)(1) <= release; -- C
-					-- FPGA problem A8
-					--when X"2a" => keys(8)(1) <= release; -- V
-					--when X"32" => keys(8)(0) <= release; -- B
-					--when X"31" => keys(8)(7) <= release; -- N
+					when X"2a" => keys(8)(1) <= release; -- V
+					when X"32" => keys(8)(0) <= release; -- B
+					when X"31" => keys(8)(7) <= release; -- N
 					when X"3a" => keys(6)(7) <= release; -- M
-					when X"41" => keys(6)(0) <= release; -- ,
-					when X"49" => keys(6)(1) <= release; -- .
-					--when X"4a" => keys(9)(0) <= release; -- /, extended = KP /
+					when X"41" => keys(6)(0) <= release; -- ,<
+					when X"49" => keys(6)(1) <= release; -- .>
+					when X"4a" => keys(9)(0) <= release; -- /? extended = KP /
 					--when X"59" => keys(0)(1) <= release; -- Right shift
 					
 					--when X"76" => keys(0)(0) <= release; -- Escape not on ORAO
@@ -288,10 +321,10 @@ begin
 					when X"04" => keys(2)(6) <= release; -- F3
 					when X"0C" => keys(2)(7) <= release; -- F4
 
-					--when X"01" => keys(9)(1) <= release; -- F9  -> ^@
-					--when X"09" => keys(10)(7) <= release; -- F10 -> ;+
-					--when X"78" => keys(9)(7) <= release; -- F11 -> :*
-					--when X"07" => keys(9)(0) <= release; -- F12 -> /?
+                                        -- Orao has too much keys in upper row
+                                        -- let's move them to row above F11..F12
+					when X"78" => keys(9)(7) <= release; -- F11 -> :*
+					when X"07" => keys(9)(1) <= release; -- F12  -> ^@
 					
 					when X"03" => --F5 
 					FNkeysSig(5) <= release;
