@@ -246,7 +246,7 @@ begin
 				
 					case keyb_data is					
 					
---					when X"0e" => keys(0)(0) <= release; -- pipe
+					when X"0e" => keys(9)(7) <= release; -- pipe -> :*
 					when X"16" => keys(5)(7) <= release; -- 1
 					when X"1e" => keys(5)(0) <= release; -- 2
 					when X"26" => keys(5)(1) <= release; -- 3
@@ -258,10 +258,10 @@ begin
 					when X"46" => keys(4)(1) <= release; -- 9
 					when X"45" => keys(10)(1) <= release; -- 0
 					when X"4e" => keys(10)(0) <= release; -- -=
-					when X"55" => keys(10)(0) <= release; -- ;+
+					when X"55" => keys(10)(7) <= release; -- ;+
 					when X"66" => keys(1)(4) <= release; -- Backspace same as cursor left
 					
---					when X"0d" => keys(0)(0) <= release; -- TAB not on ORAO
+					when X"0d" => keys(9)(1) <= release; -- TAB -> ^@
 					when X"15" => keys(5)(5) <= release; -- Q
 					when X"1d" => keys(5)(6) <= release; -- W
 					when X"24" => keys(5)(4) <= release; -- E
@@ -291,6 +291,7 @@ begin
 					when X"5d" => keys(9)(6) <= release; -- Ž
 
 					when X"12" => keys(2)(1) <= release; -- Left shift
+					when X"61" => keys(9)(1) <= release; -- international < [C>
 					when X"1a" => keys(7)(7) <= release; -- Z
 					when X"22" => keys(7)(0) <= release; -- X
 					when X"21" => keys(7)(1) <= release; -- C
@@ -301,7 +302,7 @@ begin
 					when X"41" => keys(6)(0) <= release; -- ,<
 					when X"49" => keys(6)(1) <= release; -- .>
 					when X"4a" => keys(9)(0) <= release; -- /? extended = KP /
-					--when X"59" => keys(0)(1) <= release; -- Right shift
+					when X"59" => keys(2)(1) <= release; -- Right shift
 					
 					--when X"76" => keys(0)(0) <= release; -- Escape not on ORAO
 					when X"29" => keys(2)(0) <= release; -- SPACE
@@ -321,10 +322,7 @@ begin
 					when X"04" => keys(2)(6) <= release; -- F3
 					when X"0C" => keys(2)(7) <= release; -- F4
 
-                                        -- Orao has too much keys in upper row
-                                        -- let's move them to row above F11..F12
-					when X"78" => keys(9)(7) <= release; -- F11 -> :*
-					when X"07" => keys(9)(1) <= release; -- F12  -> ^@
+					-- todo not working +, ž, cursors
 					
 					when X"03" => --F5 
 					FNkeysSig(5) <= release;
