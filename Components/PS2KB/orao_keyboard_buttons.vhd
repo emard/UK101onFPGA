@@ -133,32 +133,32 @@ signal KEYB : std_logic_vector(7 downto 0);
 -- PS/2 scan codes which are different in set2 and set3
 
 -- PS/2 Set2
---constant scan_zh          : std_logic_vector(7 downto 0) := x"5d";
---constant scan_left_ctrl   : std_logic_vector(7 downto 0) := x"14";
---constant scan_right_ctrl  : std_logic_vector(7 downto 0) := x"14"; -- extended
---constant scan_ltgt        : std_logic_vector(7 downto 0) := x"5d";
---constant scan_arrow_left  : std_logic_vector(7 downto 0) := x"6b";
---constant scan_arrow_right : std_logic_vector(7 downto 0) := x"74";
---constant scan_arrow_up    : std_logic_vector(7 downto 0) := x"75";
---constant scan_arrow_down  : std_logic_vector(7 downto 0) := x"72";
---constant scan_f1          : std_logic_vector(7 downto 0) := x"05";
---constant scan_f2          : std_logic_vector(7 downto 0) := x"06";
---constant scan_f3          : std_logic_vector(7 downto 0) := x"04";
---constant scan_f4          : std_logic_vector(7 downto 0) := x"0c";
+constant scan_zh          : std_logic_vector(7 downto 0) := x"5d";
+constant scan_left_ctrl   : std_logic_vector(7 downto 0) := x"14";
+constant scan_right_ctrl  : std_logic_vector(7 downto 0) := x"14"; -- extended
+constant scan_ltgt        : std_logic_vector(7 downto 0) := x"5d";
+constant scan_arrow_left  : std_logic_vector(7 downto 0) := x"6b";
+constant scan_arrow_right : std_logic_vector(7 downto 0) := x"74";
+constant scan_arrow_up    : std_logic_vector(7 downto 0) := x"75";
+constant scan_arrow_down  : std_logic_vector(7 downto 0) := x"72";
+constant scan_f1          : std_logic_vector(7 downto 0) := x"05";
+constant scan_f2          : std_logic_vector(7 downto 0) := x"06";
+constant scan_f3          : std_logic_vector(7 downto 0) := x"04";
+constant scan_f4          : std_logic_vector(7 downto 0) := x"0c";
 
 -- PS/2 Set3
-constant scan_zh          : std_logic_vector(7 downto 0) := x"5c";
-constant scan_left_ctrl   : std_logic_vector(7 downto 0) := x"11";
-constant scan_right_ctrl  : std_logic_vector(7 downto 0) := x"58";
-constant scan_ltgt        : std_logic_vector(7 downto 0) := x"13";
-constant scan_arrow_left  : std_logic_vector(7 downto 0) := x"61";
-constant scan_arrow_right : std_logic_vector(7 downto 0) := x"6a";
-constant scan_arrow_up    : std_logic_vector(7 downto 0) := x"63";
-constant scan_arrow_down  : std_logic_vector(7 downto 0) := x"60";
-constant scan_f1          : std_logic_vector(7 downto 0) := x"07";
-constant scan_f2          : std_logic_vector(7 downto 0) := x"0f";
-constant scan_f3          : std_logic_vector(7 downto 0) := x"17";
-constant scan_f4          : std_logic_vector(7 downto 0) := x"1f";
+--constant scan_zh          : std_logic_vector(7 downto 0) := x"5c";
+--constant scan_left_ctrl   : std_logic_vector(7 downto 0) := x"11";
+--constant scan_right_ctrl  : std_logic_vector(7 downto 0) := x"58";
+--constant scan_ltgt        : std_logic_vector(7 downto 0) := x"13";
+--constant scan_arrow_left  : std_logic_vector(7 downto 0) := x"61";
+--constant scan_arrow_right : std_logic_vector(7 downto 0) := x"6a";
+--constant scan_arrow_up    : std_logic_vector(7 downto 0) := x"63";
+--constant scan_arrow_down  : std_logic_vector(7 downto 0) := x"60";
+--constant scan_f1          : std_logic_vector(7 downto 0) := x"07";
+--constant scan_f2          : std_logic_vector(7 downto 0) := x"0f";
+--constant scan_f3          : std_logic_vector(7 downto 0) := x"17";
+--constant scan_f4          : std_logic_vector(7 downto 0) := x"1f";
 
 begin	
 
