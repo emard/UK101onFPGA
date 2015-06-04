@@ -1,7 +1,7 @@
 # UK101 and ORAO on FPGA
 
-A fork of Grant Seale's great work
-for emulation of Compukit UK101 on FPGA
+A fork of Grant Seale's https://twitter.com/zx80nut 
+great work for emulation of Compukit UK101 on FPGA
 https://www.youtube.com/watch?v=0S_cR3xW2UU
 downloaded from UK101 page 
 http://searle.hostei.com/grant/uk101FPGA/index.html
