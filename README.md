@@ -5,7 +5,6 @@ great work for emulation of Compukit UK101 on FPGA
 https://www.youtube.com/watch?v=0S_cR3xW2UU
 downloaded from UK101 page 
 http://searle.hostei.com/grant/uk101FPGA/index.html
-(recently this page is unreachable?).
 
 UK101 is used as the base for emulating ORAO computer on FPGA.
 ![ORAO](/pic/orao.jpg)
@@ -15,6 +14,28 @@ ORAO was created as an upgrade of GALEB with
 256x256 bitmap graphics framebuffer and more RAM.
 GALEB has been also known as YU101.
 YU101 was similar to UK101.
+
+# Connecting
+
+The emulator generates PAL 50Hz composite video signal
+using simple mixer with 2 resistors:
+
+    SYNC pin  --  1k     -- comp output
+    VIDEO pin -- 470 ohm -- comp output
+
+It can be displayed on TV with composite input (yellow cinch)
+or projectors.
+
+Some FPGA boards like ULX2S have several push buttons and 
+they can be used to enter BASIC.
+
+For some better typing experience, PS/2 keyboard can be connected.
+Although rated for 5V, most PS/2 keyboard will work with 3.3V
+supplied from FPGA board. CLK and DATA need 1k pullup resistors:
+
+    CLK  -- 1k -- 3.3V
+    DATA -- 1k -- 3.3V 
+
 
 # UK101 TB276 Altera Cyclone-4
 
