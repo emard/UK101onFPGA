@@ -64,6 +64,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity orao_keyboard_buttons is
+generic (
+        ps2set : integer := 2  -- keycode scanset
+);
 port (
 	CLK    : in std_logic;
 	nRESET : in std_logic;
@@ -126,6 +129,36 @@ signal FNkeysSig : std_logic_vector(12 downto 0) := (others => '0');
 signal FNtoggledKeysSig	: std_logic_vector(12 downto 0) := (others => '0');
 
 signal KEYB : std_logic_vector(7 downto 0);
+
+-- PS/2 scan codes which are different in set2 and set3
+
+-- PS/2 Set2
+--constant scan_zh          : std_logic_vector(7 downto 0) := x"5d";
+--constant scan_left_ctrl   : std_logic_vector(7 downto 0) := x"14";
+--constant scan_right_ctrl  : std_logic_vector(7 downto 0) := x"14"; -- extended
+--constant scan_ltgt        : std_logic_vector(7 downto 0) := x"5d";
+--constant scan_arrow_left  : std_logic_vector(7 downto 0) := x"6b";
+--constant scan_arrow_right : std_logic_vector(7 downto 0) := x"74";
+--constant scan_arrow_up    : std_logic_vector(7 downto 0) := x"75";
+--constant scan_arrow_down  : std_logic_vector(7 downto 0) := x"72";
+--constant scan_f1          : std_logic_vector(7 downto 0) := x"05";
+--constant scan_f2          : std_logic_vector(7 downto 0) := x"06";
+--constant scan_f3          : std_logic_vector(7 downto 0) := x"04";
+--constant scan_f4          : std_logic_vector(7 downto 0) := x"0c";
+
+-- PS/2 Set3
+constant scan_zh          : std_logic_vector(7 downto 0) := x"5c";
+constant scan_left_ctrl   : std_logic_vector(7 downto 0) := x"11";
+constant scan_right_ctrl  : std_logic_vector(7 downto 0) := x"58";
+constant scan_ltgt        : std_logic_vector(7 downto 0) := x"13";
+constant scan_arrow_left  : std_logic_vector(7 downto 0) := x"61";
+constant scan_arrow_right : std_logic_vector(7 downto 0) := x"6a";
+constant scan_arrow_up    : std_logic_vector(7 downto 0) := x"63";
+constant scan_arrow_down  : std_logic_vector(7 downto 0) := x"60";
+constant scan_f1          : std_logic_vector(7 downto 0) := x"07";
+constant scan_f2          : std_logic_vector(7 downto 0) := x"0f";
+constant scan_f3          : std_logic_vector(7 downto 0) := x"17";
+constant scan_f4          : std_logic_vector(7 downto 0) := x"1f";
 
 begin	
 
@@ -288,10 +321,14 @@ begin
 					when X"4b" => keys(6)(4) <= release; -- L
 					when X"4c" => keys(9)(4) <= release; -- Č
 					when X"52" => keys(9)(5) <= release; -- Ć
-					when X"5d" => keys(9)(6) <= release; -- Ž
+					when scan_zh => keys(9)(6) <= release; -- Ž
+					--when X"5D" => keys(9)(6) <= release; -- Ž
+					--when X"5c" => keys(9)(6) <= release; -- Set3: Ž
 
 					when X"12" => keys(2)(1) <= release; -- Left shift
-					when X"61" => keys(9)(1) <= release; -- international < [C>
+					when scan_ltgt => keys(9)(1) <= release; -- international < >
+					--when X"61" => keys(9)(1) <= release; -- international < >
+					--when X"13" => keys(9)(1) <= release; -- Set3: international < >
 					when X"1a" => keys(7)(7) <= release; -- Z
 					when X"22" => keys(7)(0) <= release; -- X
 					when X"21" => keys(7)(1) <= release; -- C
@@ -306,24 +343,32 @@ begin
 					
 					--when X"76" => keys(0)(0) <= release; -- Escape not on ORAO
 					when X"29" => keys(2)(0) <= release; -- SPACE
-					when X"14" => keys(1)(1) <= release; -- CTRL
+					when scan_left_ctrl => keys(1)(1) <= release; -- CTRL
 					
 					-- Cursor keys - these are actually extended (E0 xx), but
 					-- the scancodes for the numeric keypad cursor keys are
 					-- are the same but without the extension, so we'll accept
 					-- the codes whether they are extended or not
-					when X"6b" => keys(1)(4) <= release; -- left arrow
-					when X"74" => keys(1)(7) <= release; -- right arrow
-					when X"75" => keys(1)(5) <= release; -- up arrow
-					when X"72" => keys(1)(6) <= release; -- down arrow
+					when scan_arrow_left => keys(1)(4) <= release; -- left arrow
+					when scan_arrow_right => keys(1)(7) <= release; -- right arrow
+					when scan_arrow_up => keys(1)(5) <= release; -- up arrow
+					when scan_arrow_down => keys(1)(6) <= release; -- down arrow
+					-- Set2: arrow keys
+					--when X"6b" => keys(1)(4) <= release; -- left arrow
+					--when X"74" => keys(1)(7) <= release; -- right arrow
+					--when X"75" => keys(1)(5) <= release; -- up arrow
+					--when X"72" => keys(1)(6) <= release; -- down arrow
+					-- Set3: arrow keys
+					--when X"61" => keys(1)(4) <= release; -- left arrow
+					--when X"6a" => keys(1)(7) <= release; -- right arrow
+					--when X"63" => keys(1)(5) <= release; -- up arrow
+					--when X"60" => keys(1)(6) <= release; -- down arrow
 
 					when X"05" => keys(2)(4) <= release; -- F1
 					when X"06" => keys(2)(5) <= release; -- F2
 					when X"04" => keys(2)(6) <= release; -- F3
 					when X"0C" => keys(2)(7) <= release; -- F4
 
-					-- todo not working +, ž, cursors
-					
 					when X"03" => --F5 
 					FNkeysSig(5) <= release;
 					if release = '0' then
