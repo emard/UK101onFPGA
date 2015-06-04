@@ -2,7 +2,10 @@
 
 A fork of Grant Seale's great work
 for emulation of Compukit UK101 on FPGA
-downloaded from UK101 page at http://searle.hostei.com/grant/uk101FPGA/index.html
+https://www.youtube.com/watch?v=0S_cR3xW2UU
+downloaded from UK101 page 
+http://searle.hostei.com/grant/uk101FPGA/index.html
+(recently this page is unreachable?).
 
 UK101 is used as the base for emulating ORAO computer on FPGA.
 ![ORAO](/pic/orao.jpg)
