@@ -20,14 +20,20 @@ YU101 was similar to UK101.
 The emulator generates PAL 50Hz composite video signal
 using simple mixer with 2 resistors:
 
-    SYNC pin  --  1k     -- comp output
-    VIDEO pin -- 470 ohm -- comp output
+    SYNC pin  --   1 k   -- composite video
+    VIDEO pin -- 470 ohm -- composite video
 
 It can be displayed on TV with composite input (yellow cinch)
 or projectors.
 
-Some FPGA boards like ULX2S have several push buttons and 
-they can be used to enter BASIC.
+ULX2S FPGA board has already video mixer with suitable resistors
+that outputs video signal to left channel (tip) of 3.5mm stereo jack. 
+With a suitable cable it can be connected directly. 
+Yellow connector is usually for video.
+
+![Cable 3.5mm to Video](/pic/cable-3.5mm-video-cinch.jpg)
+
+ULX2S also has has several push buttons which can be used to enter BASIC.
 
 For some better typing experience, PS/2 keyboard can be connected.
 Although rated for 5V, most PS/2 keyboard will work with 3.3V
