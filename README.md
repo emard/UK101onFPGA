@@ -57,6 +57,14 @@ It compiles but I haven't actually tested it :)
 
 # UK101 64K RAM 64x32 screen ULX2S Lattice XP2
 
+For quickstart flash the bitstream:
+
+    cd proj/lattice/uk101_64x32_ulx2s_sram
+    unzip UK101-64K-64x32-ULX2S-8E.zip
+    ujprog -j flash UK101-64K-64x32-ULX2S-8E.jed
+
+On next power up board will become UK101
+
 To compile UK101 with 64K RAM (BASIC reports 40K free) 
 and 2K extended screen size of 64x32 chars for ULX2S 
 board (Lattice XP2).
@@ -90,6 +98,14 @@ On screen:
     OK
 
 # ORAO 32K RAM 256x256 screen ULX2S Lattice XP2
+
+For quickstart flash the bitstream:
+
+    cd proj/lattice/orao_ulx2s_sram
+    unzip ORAO-103-32K-ULX2S-8E.zip
+    ujprog -j flash ORAO-103-32K-ULX2S-8E.jed
+
+On next power up board will become UK101
 
 To compile ORAO with 32K RAM (BASIC reports 23K free) 
 and 8K graphics screen size of 256x256 pixels for ULX2S 
