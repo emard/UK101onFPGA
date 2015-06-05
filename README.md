@@ -105,7 +105,7 @@ For quickstart flash the bitstream:
     unzip ORAO-103-32K-ULX2S-8E.zip
     ujprog -j flash ORAO-103-32K-ULX2S-8E.jed
 
-On next power up board will become UK101
+On next power up board will become ORAO 103
 
 To compile ORAO with 32K RAM (BASIC reports 23K free) 
 and 8K graphics screen size of 256x256 pixels for ULX2S 
