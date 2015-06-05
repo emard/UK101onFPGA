@@ -39,8 +39,8 @@ For some better typing experience, PS/2 keyboard can be connected.
 Although rated for 5V, most PS/2 keyboard will work with 3.3V
 supplied from FPGA board. CLK and DATA need 1k pullup resistors:
 
-    CLK  -- 1k -- 3.3V
-    DATA -- 1k -- 3.3V 
+    PS/2 CLK  (ULX2S pin 8) -- 1k -- 3.3V
+    PS/2 DATA (ULX2S pin 9) -- 1k -- 3.3V 
 
 
 # UK101 TB276 Altera Cyclone-4
