@@ -136,14 +136,20 @@ begin
 		DO => cpuDataOut);
 			
 
-	u2 : entity work.OraoBAS -- 8KB
+	u2 : entity work.ROMgeneric -- 8KB
+	generic map(
+	        filename => "bas12.vhex"
+	)
 	port map(
 		address => cpuAddress(12 downto 0),
 		clock => clk,
 		q => basRomData
 	);
 
-	u2b : entity work.OraoCRT -- 8KB
+	u2b : entity work.ROMgeneric -- 8KB
+	generic map(
+	        filename => "crt12.vhex"
+	)
 	port map(
 		address => cpuAddress(12 downto 0),
 		clock => clk,

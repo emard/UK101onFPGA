@@ -16,12 +16,14 @@ SYMLINK="${SYMLINK} \
   ../../../lattice/lattice_ProgRam.vhd \
   ../../../lattice/ProgRam.vhd \
   ../../../lattice/ProgSRam.vhd \
-  ../../../lattice/lattice_OraoBAS13.vhd \
-  ../../../lattice/OraoBAS.vhd \
   ../../../lattice/lattice_OraoCRT13.vhd \
   ../../../lattice/OraoCRT.vhd \
   ../../../lattice/main_orao.vhd \
   ../../../orao/orao.vhd \
+  ../../../orao/bas13.vhex \
+  ../../../orao/crt13.vhex \
+  ../../../generic/ROMgeneric.vhd \
+  ../../../generic/rom_generic.v \
   ../../../generic/bram_2port.vhd \
   ../../../Components/M6502/T65_ALU.vhd \
   ../../../Components/M6502/T65.vhd \
@@ -32,6 +34,8 @@ SYMLINK="${SYMLINK} \
   ../../../Components/PS2KB/orao_keyboard_buttons.vhd \
   ../../../Components/UART/bufferedUART.vhd \
   "
+#  ../../../lattice/lattice_OraoBAS13.vhd \
+#  ../../../lattice/OraoBAS.vhd \
 
 #  ../../../Components/PS2KB/UK101keyboard.vhd \
 #  ../../../Components/PS2KB/UK101keyboard_buttons.vhd \
