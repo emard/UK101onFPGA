@@ -11,13 +11,9 @@ SYMLINK="${SYMLINK} \
   ../common/build.sh ../common/build.tcl \
   ../../../lattice/lattice_pll_25M_50M.vhd \
   ../../../lattice/pll_25M_50M.vhd \
-  ../../../lattice/lattice_DisplayRam8K.vhd \
-  ../../../lattice/DisplayRam8K.vhd \
   ../../../lattice/lattice_ProgRam.vhd \
   ../../../lattice/ProgRam.vhd \
   ../../../lattice/ProgSRam.vhd \
-  ../../../lattice/lattice_OraoCRT13.vhd \
-  ../../../lattice/OraoCRT.vhd \
   ../../../lattice/main_orao.vhd \
   ../../../orao/orao.vhd \
   ../../../generic/ROMgeneric.vhd \
