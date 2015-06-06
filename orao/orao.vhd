@@ -138,7 +138,7 @@ begin
 
 	u2 : entity work.ROMgeneric -- 8KB
 	generic map(
-	        filename => "bas12.vhex"
+	        filename => "bas13.vhex"
 	)
 	port map(
 		address => cpuAddress(12 downto 0),
@@ -148,7 +148,7 @@ begin
 
 	u2b : entity work.ROMgeneric -- 8KB
 	generic map(
-	        filename => "crt12.vhex"
+	        filename => "crt13.vhex"
 	)
 	port map(
 		address => cpuAddress(12 downto 0),
