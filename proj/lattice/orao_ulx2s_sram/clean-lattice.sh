@@ -22,6 +22,7 @@ SYMLINK="${SYMLINK} \
   ../../../lattice/OraoCRT.vhd \
   ../../../lattice/main_orao.vhd \
   ../../../orao/orao.vhd \
+  ../../../generic/bram_2port.vhd \
   ../../../Components/M6502/T65_ALU.vhd \
   ../../../Components/M6502/T65.vhd \
   ../../../Components/M6502/T65_MCode.vhd \

@@ -241,18 +241,21 @@ begin
 		video => video
 	);
 
-	u8g: entity work.DisplayRam8K 
+	u8_generic: entity work.bram_2port
+	generic map(
+	  C_mem_size => 8
+	)
 	port map
 	(
-		address_a => cpuAddress(12 downto 0),
-		address_b => dispAddrB,
-		clock  => clk,
-		data_a => cpuDataOut,
-		data_b => (others => '0'),
-		wren_a => not(n_memWR or n_dispRamCS),
-		wren_b => '0',
-		q_a => dispRamDataOutA,
-		q_b => dispRamDataOutB
+		clk => clk,
+		rw_port_addr(15 downto 13) => (others => '0'),
+		rw_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+		rw_port_write => not(n_memWR or n_dispRamCS),
+		rw_port_data_in => cpuDataOut,
+		rw_port_data_out => dispRamDataOutA,
+		ro_port_addr(15 downto 13) => (others => '0'),
+		ro_port_addr(12 downto 0) => dispAddrB,
+		ro_port_data_out => dispRamDataOutB
 	);
 	
 	buttons2keys: if onboard_buttons = '1' generate
