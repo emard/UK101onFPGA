@@ -20,8 +20,6 @@ SYMLINK="${SYMLINK} \
   ../../../lattice/OraoCRT.vhd \
   ../../../lattice/main_orao.vhd \
   ../../../orao/orao.vhd \
-  ../../../orao/bas13.vhex \
-  ../../../orao/crt13.vhex \
   ../../../generic/ROMgeneric.vhd \
   ../../../generic/rom_generic.v \
   ../../../generic/bram_2port.vhd \
@@ -36,6 +34,8 @@ SYMLINK="${SYMLINK} \
   "
 #  ../../../lattice/lattice_OraoBAS13.vhd \
 #  ../../../lattice/OraoBAS.vhd \
+#  ../../../orao/bas13.vhex \
+#  ../../../orao/crt13.vhex \
 
 #  ../../../Components/PS2KB/UK101keyboard.vhd \
 #  ../../../Components/PS2KB/UK101keyboard_buttons.vhd \
@@ -96,3 +96,9 @@ do
 done
 cat ../../common/project.ldf.last
 ) > project.ldf
+
+# now convert ROMs
+../../../../generic/convbin2vhex.sh ../../../../orao/BAS13.ROM bas13.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/CRT13.ROM crt13.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/BAS12.ROM bas12.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/CRT12.ROM crt12.vhex
