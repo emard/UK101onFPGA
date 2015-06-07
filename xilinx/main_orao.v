@@ -80,7 +80,7 @@ if(video_test)
 wire [2:0] TMDS_RGB;
 HDMI_OraoGraphDisplay8K
 #(
-  .test_picture(1)  // 0-disable 1-enable test picture
+  .test_picture(0)  // 0-disable 1-enable test picture
 )
 (
   .clk_pixel(clk_pixel),
