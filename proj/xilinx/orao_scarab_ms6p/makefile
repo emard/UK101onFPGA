@@ -29,7 +29,7 @@ vhdfiles = \
 
 
 vfiles = \
-  ../../../xilinx/main_orao.v \
+  ../../../xilinx/main_scarab_orao.v \
   ../../../generic/rom_generic.v \
   ../../../Components/HDMI/HDMI_OraoGraphDisplay8K.v \
 
