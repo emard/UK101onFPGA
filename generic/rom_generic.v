@@ -1,6 +1,10 @@
 // generic rom - synthesis tool should build it as
 // preloaded block RAM
 
+// warning - ROM initialization file
+// has to be in the same directory where
+// this verilog module is
+
 module rom_generic(
   input wire clock,
   input wire [15:0] addr,  // 16-bit input address 8K
