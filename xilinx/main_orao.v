@@ -59,8 +59,7 @@ assign key_enter = autotype == 6
 // instantiate orao computer
 orao
 #(
-  .model("102"), // orao model 102 or 103 (different roms)
-  // .video_test(0), // overlay HDMI wideo test
+  .model("103"), // orao model 102 (hr) or 103 (en)
   .onboard_buttons(1)
 )
 (
@@ -79,7 +78,11 @@ if(video_test)
   assign dispData = dispAddr[10:3];
 
 wire [2:0] TMDS_RGB;
-HDMI_OraoGraphDisplay8K(
+HDMI_OraoGraphDisplay8K
+#(
+  .test_picture(1)  // 0-disable 1-enable test picture
+)
+(
   .clk_pixel(clk_pixel),
   .clk_tmds(clk_tmds),
   .dispAddr(dispAddr), // output from video
