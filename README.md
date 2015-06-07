@@ -143,6 +143,12 @@ on screen:
     23534 BYTES FREE
     _
 
+
+# ORAO 32K RAM 256x256 screen Scarab Hardware miniSpartan6+ xilinx XC6SLX25
+
+It works on XC6SLX25 based board with HDMI output.
+Should also work on smaller FPGA like XC6SLX9 (untested).
+
 # Online documentation
 
 CEGMON manual:
