@@ -3,7 +3,7 @@
 
 module rom_generic(
   input wire clock,
-  input wire [12:0] addr,  // 13-bit input address 8K
+  input wire [15:0] addr,  // 16-bit input address 8K
   output reg [7:0] data   // 8-bit data output
   );
   

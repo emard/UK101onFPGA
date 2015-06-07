@@ -12,7 +12,7 @@ entity bram_2port is
 	C_mem_size: integer := 8 -- size in KB
     );
     port(
-	clk: in std_logic;
+	clock: in std_logic;
 	-- read-only port
 	ro_port_addr: in std_logic_vector(15 downto 0);
 	ro_port_data_out: out std_logic_vector(7 downto 0);
@@ -50,9 +50,9 @@ begin
     rw_port_data_out <= rw_data;
     ro_port_data_out <= ro_data;
 
-    process(clk)
+    process(clock)
     begin
-	if falling_edge(clk) then
+	if falling_edge(clock) then
 	    if rw_port_write = '1' then
 		bram(conv_integer(rw_port_addr)) <= rw_port_data_in(7 downto 0);
 	    end if;

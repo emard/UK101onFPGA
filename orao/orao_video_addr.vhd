@@ -139,9 +139,10 @@ begin
 	        filename => "bas13.vhex"
 	)
 	port map(
-		address => cpuAddress(12 downto 0),
 		clock => clk,
-		q => basRomData
+		ro_port_addr(15 downto 13) => (others => '0'),
+                ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+		ro_port_data_out => basRomData
 	);
 
 	u2b : entity work.ROMgeneric -- 8KB
@@ -149,9 +150,10 @@ begin
 	        filename => "crt13.vhex"
 	)
 	port map(
-		address => cpuAddress(12 downto 0),
 		clock => clk,
-		q => monitorRomData
+		ro_port_addr(15 downto 13) => (others => '0'),
+		ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+		ro_port_data_out => monitorRomData
 	);
 	
 	u3: entity work.bram_1port
@@ -160,7 +162,7 @@ begin
 	)
 	port map
 	(
-		clk => clk,
+		clock => clk,
 		rw_port_addr(15) => '0',
 		rw_port_addr(14 downto 0) => cpuAddress(14 downto 0),
 		rw_port_write => not(n_memWR or n_ramCS),
@@ -216,7 +218,7 @@ begin
 	end process;
 	
 	-- show test screen during the reset is pressed
-	videoData <= dispRamDataOutB when n_reset = '1' 
+	videoData <= dispRamDataOutB when n_reset = '1'
 	        else test_pattern(conv_integer(videoAddr(7 downto 5)));
 	
 	u8_generic: entity work.bram_2port
@@ -225,7 +227,7 @@ begin
 	)
 	port map
 	(
-		clk => clk,
+		clock => clk,
 		rw_port_addr(15 downto 13) => (others => '0'),
 		rw_port_addr(12 downto 0) => cpuAddress(12 downto 0),
 		rw_port_write => not(n_memWR or n_dispRamCS),
@@ -244,8 +246,9 @@ begin
 	port map
 	(
 		clock => clk,
-		address(12 downto 0) => videoAddr,
-		q => dispRamDataOutB
+		ro_port_addr(15 downto 13) => (others => '0'),
+		ro_port_addr(12 downto 0) => videoAddr,
+		ro_port_data_out => dispRamDataOutB
 	);
 	end generate;
 	

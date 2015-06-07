@@ -12,7 +12,7 @@ entity bram_1port is
 	C_mem_size: integer := 8 -- size in KB
     );
     port(
-	clk: in std_logic;
+	clock: in std_logic;
 	-- read-write port
 	rw_port_write: in std_logic;
 	rw_port_addr: in std_logic_vector(15 downto 0);
@@ -41,9 +41,9 @@ architecture x of bram_1port is
 
 begin
 
-    process(clk)
+    process(clock)
     begin
-	if falling_edge(clk) then
+	if falling_edge(clock) then
 	    if rw_port_write = '1' then
 		bram(conv_integer(rw_port_addr)) <= rw_port_data_in;
 	    end if;
