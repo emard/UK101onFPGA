@@ -38,17 +38,23 @@ always @(posedge pixclk) vSync <= (CounterY>=490) && (CounterY<492);
 // managa address and fetch data
 always @(posedge pixclk)
   begin
-    if(CounterY[9:8] != 0)
+    if(CounterY[9] != 0)
       dispAddr <= 0;
     else
-      if(CounterX[9:8] == 0 && CounterX[2:0] == 0) // CounterX <= 255
-        dispAddr <= dispAddr + 1;
+    begin
+      // again scan odd Y line
+      if(CounterX == 0 && CounterY[0] == 1)
+        dispAddr <= dispAddr - 31;
+      else // normal forward scan
+        if(CounterX[9] == 0 && CounterX[3:0] == 0)
+          dispAddr <= dispAddr + 1;
+    end
   end
 
 reg [7:0] shiftData;
 always @(posedge pixclk)
   begin
-    shiftData <= (CounterX[2:0] == 0 && CounterX[9:8] == 0 && CounterY[9:8] == 0) ? dispData : shiftData[7:1];
+    shiftData <= (CounterX[3:0] == 0 && CounterX[9] == 0 && CounterY[9] == 0) ? dispData : shiftData[7:1];
   end
 
 wire [7:0] colorValue;
