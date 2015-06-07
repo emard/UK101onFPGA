@@ -141,9 +141,10 @@ begin
 	        filename => "bas13.vhex"
 	)
 	port map(
-		address => cpuAddress(12 downto 0),
 		clock => clk,
-		q => basRomData
+		ro_port_addr(15 downto 13) => (others => '0'),
+                ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+		ro_port_data_out => basRomData
 	);
 
 	u2b : entity work.ROMgeneric -- 8KB
@@ -151,9 +152,10 @@ begin
 	        filename => "crt13.vhex"
 	)
 	port map(
-		address => cpuAddress(12 downto 0),
 		clock => clk,
-		q => monitorRomData
+		ro_port_addr(15 downto 13) => (others => '0'),
+                ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+		ro_port_data_out => monitorRomData
 	);
 	
         internal_8K: if use_external_64K = '0' generate
@@ -238,9 +240,9 @@ begin
 	
 	u6g: entity work.OraoGraphDisplay8K
 	port map (
+		clk => clk,
 		dispAddr => dispAddrB,
 		dispData => dispData,
-		clk => clk,
 		h_sync => videoHSync,
 		v_sync => videoVSync,
 		sync => videoSync,
@@ -253,7 +255,7 @@ begin
 	)
 	port map
 	(
-		clk => clk,
+		clock => clk,
 		rw_port_addr(15 downto 13) => (others => '0'),
 		rw_port_addr(12 downto 0) => cpuAddress(12 downto 0),
 		rw_port_write => not(n_memWR or n_dispRamCS),
