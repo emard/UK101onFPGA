@@ -27,7 +27,7 @@ assign LEDS[7:0] = 8'h55; // display fixed LED pattern
 wire [12:0] dispAddr;
 wire [7:0] dispData;
 
-parameter reset_period_width = 25;
+parameter reset_period_width = 27;
 
 reg [reset_period_width:0] resetcounter;
 
@@ -37,6 +37,19 @@ always @(posedge clk_pixel)
     resetcounter <= resetcounter + 1;
   end
 
+// demo for FPGA boards with no keyboard
+// automatically press reset, b c enter enter
+// to enter basic
+wire reset_n;
+assign reset_n = resetcounter[reset_period_width:reset_period_width-4] == 0 ? 0 : 1;
+wire key_b;
+assign key_b = resetcounter[reset_period_width:reset_period_width-4] == 2 ? 1 : 0;
+wire key_c;
+assign key_c = resetcounter[reset_period_width:reset_period_width-4] == 4 ? 1 : 0;
+wire key_enter;
+assign key_enter = resetcounter[reset_period_width:reset_period_width-4] == 6
+            || resetcounter[reset_period_width:reset_period_width-4] == 8  ? 1 : 0;
+
 // instantiate orao computer
 orao
 #(
@@ -45,10 +58,10 @@ orao
 )
 (
   .clk(clk_pixel),
-  .n_reset(resetcounter[reset_period_width]),
-  .key_enter(1'b0),
-  .key_b(1'b0),
-  .key_c(1'b0),
+  .n_reset(reset_n),
+  .key_enter(key_enter),
+  .key_b(key_b),
+  .key_c(key_c),
   .ps2clk(1'b1),
   .ps2data(1'b1),
   .videoAddr(dispAddr), // input from video
