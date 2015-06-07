@@ -38,7 +38,7 @@ always @(posedge clk_pixel)
   end
 
 // demo for FPGA boards with no keyboard
-// automatically press reset, b c enter enter
+// automatically press reset, b c enter enter enter
 // to enter basic
 wire reset_n;
 assign reset_n = resetcounter[reset_period_width:reset_period_width-4] == 0 ? 0 : 1;
@@ -48,11 +48,14 @@ wire key_c;
 assign key_c = resetcounter[reset_period_width:reset_period_width-4] == 4 ? 1 : 0;
 wire key_enter;
 assign key_enter = resetcounter[reset_period_width:reset_period_width-4] == 6
-            || resetcounter[reset_period_width:reset_period_width-4] == 8  ? 1 : 0;
+                || resetcounter[reset_period_width:reset_period_width-4] == 8
+                || resetcounter[reset_period_width:reset_period_width-4] == 10  
+                 ? 1 : 0;
 
 // instantiate orao computer
 orao
 #(
+  .model("102"), // orao model 102 or 103 (different roms)
   .onboard_buttons(1)
   // .use_external_64K(0)
 )

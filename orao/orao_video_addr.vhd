@@ -22,6 +22,7 @@ use  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity orao is
         generic (
+          model : string := "102";
           onboard_buttons : integer := 1
         );
 	port(
@@ -136,7 +137,7 @@ begin
 
 	u2 : entity work.ROMgeneric -- 8KB
 	generic map(
-	        filename => "bas13.vhex"
+	        filename => "bas" & model & ".vhex"
 	)
 	port map(
 		clock => clk,
@@ -147,7 +148,7 @@ begin
 
 	u2b : entity work.ROMgeneric -- 8KB
 	generic map(
-	        filename => "crt13.vhex"
+	        filename => "crt" & model & ".vhex"
 	)
 	port map(
 		clock => clk,
@@ -241,7 +242,7 @@ begin
         romtest: if false generate
 	u8_testrom: entity work.ROMgeneric
 	generic map(
-           filename => "bas13.vhex"
+           filename => "bas" & model & ".vhex"
 	)
 	port map
 	(
