@@ -48,13 +48,20 @@ always @(posedge pixclk)
       else // normal forward scan
         if(CounterX[9] == 0 && CounterX[3:0] == 0)
           dispAddr <= dispAddr + 1;
+      /*
+      if(CounterY[0] == 1 && CounterX == 0)
+        dispAddr[12:5] <= dispAddr[12:5] + 1;
+      if(CounterX[9] == 0 && CounterX[3:0] == 0)
+        dispAddr[4:0] <= dispAddr[4:0] + 1;
+      */
     end
   end
 
 reg [7:0] shiftData;
 always @(posedge pixclk)
   begin
-    shiftData <= (CounterX[3:0] == 0 && CounterX[9] == 0 && CounterY[9] == 0) ? dispData : shiftData[7:1];
+    if(CounterX[0] == 0)
+      shiftData <= (CounterX[3:0] == 0 && CounterX[9] == 0 && CounterY[9] == 0) ? dispData : shiftData[7:1];
   end
 
 wire [7:0] colorValue;
