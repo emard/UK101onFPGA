@@ -10,15 +10,15 @@ module rom_generic(
   parameter rom_bytes = 8192;
   parameter filename = "bas13.vhex";
 
-  (* synthesis, rom_block = "ROM_CELL XYZ01" *)
   reg [7:0] rom [rom_bytes-1:0];
   
   initial
     begin
       $readmemh(filename, rom);
+      // $readmemh(filename, rom, 0, rom_bytes-1);
     end
   
-  always@(posedge clock)
+  always@(negedge clock)
     begin
       data <= rom[addr];
     end
