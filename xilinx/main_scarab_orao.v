@@ -8,8 +8,6 @@ module main_orao(
 	output TMDS_out_CLK_P, TMDS_out_CLK_N
 );
 
-parameter video_test = 0;
-
 ////////////////////////////////////////////////////////////////////////
 
 // generiate HDMI clocks
@@ -43,7 +41,7 @@ wire [4:0] autotype = resetcounter[reset_period_width:reset_period_width-4];
 // demo for FPGA boards with no buttons
 // automatically type onboard buttons
 // reset, b c enter enter enter
-// to enter basic
+// to get basic prompt
 wire reset_n;
 assign reset_n = autotype == 0 ? 0 : 1;
 wire key_b;
@@ -74,9 +72,6 @@ orao
   .videoAddr(dispAddr), // input from video
   .videoData(dispData)  // output to video
 );
-
-if(video_test)
-  assign dispData = dispAddr[10:3];
 
 wire [2:0] TMDS_RGB;
 HDMI_OraoGraphDisplay8K
