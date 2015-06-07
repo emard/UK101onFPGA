@@ -60,7 +60,8 @@ assign key_enter = autotype == 6
 orao
 #(
   .clk_mhz(25),  // MHz clock frequency
-  .model("103")  // orao model 102 (hr) or 103 (en)
+  .ram_kb(24),   // KB program memory (up to 24 in steps of 4)
+  .model("103")  // orao model 102 (HR) or 103 (EN)
 )
 (
   .clk(clk_pixel),

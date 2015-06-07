@@ -27,6 +27,7 @@ use  IEEE.STD_LOGIC_UNSIGNED.all;
 entity orao is
         generic (
           model : string := "102";
+          ram_kb: integer := 24; -- KB RAM this computer will have
           clk_mhz : integer := 25; -- clock freq in MHz
           serial_baud : integer := 9600 -- output serial baudrate
         );
@@ -103,13 +104,10 @@ begin
 	-- 0xC000, 0xDFFF, 'BASIC ROM',
 	-- 0xE000, 0xFFFF, 'sisytem ROM',
 
-	n_dispRamCS <= '0' when cpuAddress(15 downto 13) = "011" else '1'; --8k
-	n_basRomCS <= '0' when cpuAddress(15 downto 13) = "110" else '1'; --8k
-	n_monitorRomCS <= '0' when cpuAddress(15 downto 13) = "111" else '1'; --8K
-	n_ramCS <= '0' when
-                   cpuAddress(15 downto 12) >= x"0"
-	       and cpuAddress(15 downto 12) <= x"5"
-              else '1';
+	n_dispRamCS <= '0' when cpuAddress(15 downto 13) = "011" else '1'; --8k @ 0x6000
+	n_basRomCS <= '0' when cpuAddress(15 downto 13) = "110" else '1'; --8k @ 0xC000
+	n_monitorRomCS <= '0' when cpuAddress(15 downto 13) = "111" else '1'; --8K @ 0xE000
+	n_ramCS <= '0' when conv_integer(cpuAddress(15 downto 12)) < ram_kb/4 else '1';
 	n_aciaCS <= '0' when cpuAddress(15 downto 1) = "100010000000000" else '1';
 	n_kbCS <= '0' when cpuAddress(15 downto 11) = "10000" else '1';
  
@@ -164,7 +162,7 @@ begin
 	
 	u3: entity work.bram_1port
 	generic map(
-	  C_mem_size => 24
+	  C_mem_size => ram_kb
 	)
 	port map
 	(
