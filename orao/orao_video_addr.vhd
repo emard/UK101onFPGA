@@ -22,7 +22,7 @@ use  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity orao is
         generic (
-          onboard_buttons  : integer := 0
+          onboard_buttons : integer := 1
         );
 	port(
 		n_reset		: in std_logic;
@@ -257,8 +257,8 @@ begin
 	port map(
 		CLK       => clk,
 		nRESET    => n_reset,
-		PS2_CLK	  => ps2Clk,
-		PS2_DATA  => ps2Data,
+		PS2_CLK	  => ps2clk,
+		PS2_DATA  => ps2data,
 		key_b     => key_b,
 		key_c     => key_c,
 		key_enter => key_enter,

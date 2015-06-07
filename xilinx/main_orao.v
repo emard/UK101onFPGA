@@ -40,8 +40,8 @@ always @(posedge clk_pixel)
 // instantiate orao computer
 orao
 #(
-  .onboard_buttons(1'b0)
-  // .use_external_64K(1'b0)
+  .onboard_buttons(1)
+  // .use_external_64K(0)
 )
 (
   .clk(clk_pixel),
