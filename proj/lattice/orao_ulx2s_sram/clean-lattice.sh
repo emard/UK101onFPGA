@@ -94,7 +94,7 @@ cat ../../common/project.ldf.last
 ) > project.ldf
 
 # now convert ROMs
-../../../../generic/convbin2vhex.sh ../../../../orao/BAS13.ROM bas13.vhex
-../../../../generic/convbin2vhex.sh ../../../../orao/CRT13.ROM crt13.vhex
-../../../../generic/convbin2vhex.sh ../../../../orao/BAS12.ROM bas12.vhex
-../../../../generic/convbin2vhex.sh ../../../../orao/CRT12.ROM crt12.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/BAS103.ROM bas103.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/CRT103.ROM crt103.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/BAS102.ROM bas102.vhex
+../../../../generic/convbin2vhex.sh ../../../../orao/CRT102.ROM crt102.vhex
