@@ -326,7 +326,7 @@ begin
 					--when X"5c" => keys(9)(6) <= release; -- Set3: Ž
 
 					when X"12" => keys(2)(1) <= release; -- Left shift
-					when scan_ltgt => keys(9)(1) <= release; -- international < >
+					--when scan_ltgt => keys(9)(1) <= release; -- international < > -> ^@
 					--when X"61" => keys(9)(1) <= release; -- international < >
 					--when X"13" => keys(9)(1) <= release; -- Set3: international < >
 					when X"1a" => keys(7)(7) <= release; -- Z
