@@ -1,5 +1,9 @@
 // (c) fpga4fun.com & KNJN LLC 2013
 
+// ORAO pixel is same size as 640x480 screen pixel
+// for future expansion and support for 
+// possible orao graphics with 512x256 pixels
+
 ////////////////////////////////////////////////////////////////////////
 module HDMI_OraoGraphDisplay8K(
         input wire clk_pixel, /* 25 MHz */
