@@ -59,8 +59,8 @@ assign key_enter = autotype == 6
 // instantiate orao computer
 orao
 #(
-  .model("103"), // orao model 102 (hr) or 103 (en)
-  .onboard_buttons(1)
+  .clk_mhz(25),  // MHz clock frequency
+  .model("103")  // orao model 102 (hr) or 103 (en)
 )
 (
   .clk(clk_pixel),

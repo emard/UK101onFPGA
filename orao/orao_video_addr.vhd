@@ -14,6 +14,10 @@
 -- eMail address available on my main web page link above.
 --
 -- Emard modified original UK101 glue into Orao glue
+-- video module not instantiated here
+-- video bus used instead.
+-- to avoid routing clock
+-- thru this module and vendor specific modules
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -23,7 +27,8 @@ use  IEEE.STD_LOGIC_UNSIGNED.all;
 entity orao is
         generic (
           model : string := "102";
-          onboard_buttons : integer := 1
+          clk_mhz : integer := 25; -- clock freq in MHz
+          serial_baud : integer := 9600 -- output serial baudrate
         );
 	port(
 		n_reset		: in std_logic;
@@ -189,28 +194,27 @@ begin
 		n_rts => rts
 	);
 	
+	-- clock divider for CPU and serial port
 	process (clk)
 	begin
 		if rising_edge(clk) then
-			if cpuClkCount < 24 then
+			if cpuClkCount < clk_mhz-1 then
 				cpuClkCount <= cpuClkCount + 1;
 			else
 				cpuClkCount <= (others=>'0');
 			end if;
-			if cpuClkCount < 12 then
+			if cpuClkCount < clk_mhz/2-1 then
 				cpuClock <= '0';
 			else
 				cpuClock <= '1';
 			end if;	
 			
---			if serialClkCount < 10416 then -- 300 baud
-			if serialClkCount < 325 then -- 9600 baud
+			if serialClkCount < 1000000*clk_mhz/(serial_baud*16)-1 then
 				serialClkCount <= serialClkCount + 1;
 			else
 				serialClkCount <= (others => '0');
 			end if;
---			if serialClkCount < 5208 then -- 150 baud
-			if serialClkCount < 162 then -- 9600 baud
+			if serialClkCount < 1000000*clk_mhz/(serial_baud*32)-1 then
 				serialClock <= '0';
 			else
 				serialClock <= '1';
@@ -218,7 +222,7 @@ begin
 		end if;
 	end process;
 	
-	-- show test screen during the reset is pressed
+	-- test grid on screen during the reset is pressed
 	videoData <= dispRamDataOutB when n_reset = '1'
 	        else test_pattern(conv_integer(videoAddr(7 downto 5)));
 	
@@ -253,7 +257,6 @@ begin
 	);
 	end generate;
 	
-	buttons2keys: if onboard_buttons = 1 generate
 	u9 : entity work.orao_keyboard_buttons
 	port map(
 		CLK       => clk,
@@ -266,6 +269,4 @@ begin
 		A	  => cpuAddress(10 downto 0),
 		Q	  => kbReadData
 	);
-	end generate;
-	
 end;
