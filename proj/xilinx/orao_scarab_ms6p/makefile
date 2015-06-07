@@ -19,6 +19,7 @@ vhdfiles = \
   ../../../generic/ROMgeneric.vhd \
   ../../../generic/bram_1port.vhd \
   ../../../generic/bram_2port.vhd \
+  ../../../generic/ProgSRam.vhd \
   ../../../Components/M6502/T65_ALU.vhd \
   ../../../Components/M6502/T65.vhd \
   ../../../Components/M6502/T65_MCode.vhd \

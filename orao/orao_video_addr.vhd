@@ -28,6 +28,7 @@ entity orao is
         generic (
           model : string := "102";
           ram_kb: integer := 24; -- KB RAM this computer will have
+          external_sram : integer := 0; -- 0: on-chip internal BRAM  1: external SRAM
           clk_mhz : integer := 25; -- clock freq in MHz
           serial_baud : integer := 9600 -- output serial baudrate
         );
@@ -160,6 +161,7 @@ begin
 		ro_port_data_out => monitorRomData
 	);
 	
+        inst_internal_bram: if external_sram = 0 generate
 	u3: entity work.bram_1port
 	generic map(
 	  C_mem_size => ram_kb
@@ -173,6 +175,25 @@ begin
 		rw_port_data_in => cpuDataOut,
 		rw_port_data_out => ramDataOut
 	);
+	end generate;
+
+        inst_external_sram: if external_sram = 1 generate
+	u3: entity work.ProgSRam 
+	port map
+	(
+		address => cpuAddress(15 downto 0),
+		data => cpuDataOut,
+		n_write => n_memWR,
+		n_enable => n_ramCS,
+		q => ramDataOut,
+                -- external SRAM interface
+                sram_lbl  => sram_lbl,
+                sram_ubl  => sram_ubl,
+                sram_wel  => sram_wel,
+                sram_a    => sram_a,
+                sram_d    => sram_d
+	);
+	end generate;
 
         uart_n_wr <= n_aciaCS or cpuClock or n_WR;
         uart_n_rd <= n_aciaCS or cpuClock or (not n_WR);
