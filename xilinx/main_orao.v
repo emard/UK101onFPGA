@@ -29,35 +29,39 @@ wire [7:0] dispData;
 
 parameter reset_period_width = 27;
 
-reg [reset_period_width:0] resetcounter;
+reg signed [reset_period_width:0] resetcounter = 0;
 
-// periodically reset
+// autotype counter
 always @(posedge clk_pixel)
   begin
-    resetcounter <= resetcounter + 1;
+    if(resetcounter != -1)
+      resetcounter <= resetcounter + 1;
   end
+  
+wire [4:0] autotype = resetcounter[reset_period_width:reset_period_width-4];
 
-// demo for FPGA boards with no keyboard
-// automatically press reset, b c enter enter enter
+// demo for FPGA boards with no buttons
+// automatically type onboard buttons
+// reset, b c enter enter enter
 // to enter basic
 wire reset_n;
-assign reset_n = resetcounter[reset_period_width:reset_period_width-4] == 0 ? 0 : 1;
+assign reset_n = autotype == 0 ? 0 : 1;
 wire key_b;
-assign key_b = resetcounter[reset_period_width:reset_period_width-4] == 2 ? 1 : 0;
+assign key_b = autotype == 2 ? 1 : 0;
 wire key_c;
-assign key_c = resetcounter[reset_period_width:reset_period_width-4] == 4 ? 1 : 0;
+assign key_c = autotype == 4 ? 1 : 0;
 wire key_enter;
-assign key_enter = resetcounter[reset_period_width:reset_period_width-4] == 6
-                || resetcounter[reset_period_width:reset_period_width-4] == 8
-                || resetcounter[reset_period_width:reset_period_width-4] == 10  
+assign key_enter = autotype == 6
+                || autotype == 8
+                || autotype == 12
                  ? 1 : 0;
 
 // instantiate orao computer
 orao
 #(
   .model("102"), // orao model 102 or 103 (different roms)
+  // .video_test(0), // overlay HDMI wideo test
   .onboard_buttons(1)
-  // .use_external_64K(0)
 )
 (
   .clk(clk_pixel),
