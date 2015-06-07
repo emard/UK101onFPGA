@@ -42,13 +42,6 @@ always @(posedge pixclk)
       dispAddr <= 0;
     else
     begin
-      // again scan odd Y line
-      if(CounterX == 0 && CounterY[0] == 1)
-        dispAddr <= dispAddr - 31;
-      else // normal forward scan
-        if(CounterX[9] == 0 && CounterX[3:0] == 0)
-          dispAddr <= dispAddr + 1;
-      /*
       // lower bits (32 bytes) always increment
       // when X counter is < 512 and modulo 16 = 0
       if(CounterX[9] == 0 && CounterX[3:0] == 0)
@@ -58,7 +51,6 @@ always @(posedge pixclk)
       // as the moment to increment upper bits of address
       if(CounterY[0] == 1 && CounterX == 512)
         dispAddr[12:5] <= dispAddr[12:5] + 1;
-      */
     end
   end
 
