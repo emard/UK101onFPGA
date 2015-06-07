@@ -10,6 +10,8 @@ module HDMI_OraoGraphDisplay8K(
 	// output wire TMDS_out_CLK is the same as pixel clock
 );
 
+parameter test_picture = 0;
+
 ////////////////////////////////////////////////////////////////////////
 
 wire clk_TMDS;
@@ -62,9 +64,31 @@ always @(posedge pixclk) blue <= CounterY[7:0] | W | A;
 
 ////////////////////////////////////////////////////////////////////////
 wire [9:0] TMDS_red, TMDS_green, TMDS_blue;
-TMDS_encoder encode_R(.clk(pixclk), .VD(red  ), .CD(2'b00)        , .VDE(DrawArea), .TMDS(TMDS_red));
-TMDS_encoder encode_G(.clk(pixclk), .VD(colorValue), .CD(2'b00) , .VDE(DrawArea), .TMDS(TMDS_green));
-TMDS_encoder encode_B(.clk(pixclk), .VD(blue ), .CD({vSync,hSync}), .VDE(DrawArea), .TMDS(TMDS_blue));
+
+TMDS_encoder encode_R
+(
+  .clk(pixclk), 
+  .VD(test_picture ? red : colorValue), 
+  .CD(2'b00),
+  .VDE(DrawArea),
+  .TMDS(TMDS_red)
+);
+TMDS_encoder encode_G
+(
+  .clk(pixclk),
+  .VD(colorValue),
+  .CD(2'b00),
+  .VDE(DrawArea),
+  .TMDS(TMDS_green)
+);
+TMDS_encoder encode_B
+(
+  .clk(pixclk),
+  .VD(test_picture ? blue : colorValue),
+  .CD({vSync,hSync}),
+  .VDE(DrawArea), 
+  .TMDS(TMDS_blue)
+);
 
 ////////////////////////////////////////////////////////////////////////
 // wire clk_TMDS, DCM_TMDS_CLKFX;  // 125MHz x 2 = 250MHz
