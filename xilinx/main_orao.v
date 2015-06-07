@@ -49,6 +49,8 @@ orao
   .key_enter(1'b0),
   .key_b(1'b0),
   .key_c(1'b0),
+  .ps2clk(1'b1),
+  .ps2data(1'b1),
   .videoAddr(dispAddr), // input from video
   .videoData(dispData)  // output to video
 );

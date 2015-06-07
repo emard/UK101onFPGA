@@ -38,8 +38,8 @@ entity orao is
 		key_b           : in std_logic;
 		key_c           : in std_logic;
 		key_enter       : in std_logic;
-		ps2Clk		: in std_logic;
-		ps2Data		: in std_logic
+		ps2clk		: in std_logic;
+		ps2data		: in std_logic
 	);
 end orao;
 
