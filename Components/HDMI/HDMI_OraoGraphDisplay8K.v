@@ -1,5 +1,9 @@
 // (c) fpga4fun.com & KNJN LLC 2013
 
+// Emard:
+// doubling x and y pixel size
+// both HDMI and VGA output
+
 // ORAO pixel is same size as 640x480 screen pixel
 // for future expansion and support for 
 // possible orao graphics with 512x256 pixels
