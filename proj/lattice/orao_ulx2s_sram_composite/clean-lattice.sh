@@ -13,7 +13,7 @@ SYMLINK="${SYMLINK} \
   ../../../lattice/pll_25M_50M.vhd \
   ../../../lattice/lattice_ProgRam.vhd \
   ../../../lattice/ProgRam.vhd \
-  ../../../lattice/main_ulx2s_orao.vhd \
+  ../../../lattice/main_ulx2s_orao_composite.vhd \
   ../../../orao/orao_video_addr.vhd \
   ../../../generic/ROMgeneric.vhd \
   ../../../generic/rom_generic.v \
