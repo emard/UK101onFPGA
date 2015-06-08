@@ -35,4 +35,20 @@ vfiles = \
   ../../../Components/HDMI/HDMI_OraoGraphDisplay8K.v \
 
 
+
 include ../include/xilinx.mk
+
+roms: ../../../generic/bas102.vhex ../../../generic/crt102.vhex ../../../generic/bas103.vhex ../../../generic/crt103.vhex
+
+../../../generic/bas102.vhex: ../../../orao/BAS102.ROM
+	../../../generic/convbin2vhex.sh $< $@
+
+../../../generic/crt102.vhex: ../../../orao/CRT102.ROM
+	../../../generic/convbin2vhex.sh $< $@
+
+../../../generic/bas103.vhex: ../../../orao/BAS103.ROM
+	../../../generic/convbin2vhex.sh $< $@
+
+../../../generic/crt103.vhex: ../../../orao/CRT103.ROM
+	../../../generic/convbin2vhex.sh $< $@
+
