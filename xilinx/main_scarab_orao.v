@@ -72,8 +72,8 @@ orao
   .key_c(key_c),
   .rxd(rs232_rx),
   .txd(rs232_tx),
-  .ps2clk(porta[0]),
-  .ps2data(porta[1]),
+  .ps2clk(PORTA[0]),
+  .ps2data(PORTA[1]),
   .videoAddr(dispAddr), // input from video
   .videoData(dispData)  // output to video
 );
