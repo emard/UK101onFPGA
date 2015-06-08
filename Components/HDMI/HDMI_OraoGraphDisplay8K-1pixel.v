@@ -7,15 +7,16 @@
 ////////////////////////////////////////////////////////////////////////
 module HDMI_OraoGraphDisplay8K(
         input wire clk_pixel, /* 25 MHz */
-        input wire clk_tmds, /* 250 MHz */
+        input wire clk_tmds, /* 250 MHz (set to 0 for VGA-only) */
         output reg [12:0] dispAddr,
         input wire [7:0] dispData,
         output wire vga_video, vga_hsync, vga_vsync,
 	output wire [2:0] TMDS_out_RGB
-	// output wire TMDS_out_CLK is the same as pixel clock
 );
 
 parameter test_picture = 0;
+parameter dbl_x = 1; // 0-normal X, 1-double X
+parameter dbl_y = 1; // 0-normal Y, 1-double Y
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -43,17 +44,27 @@ always @(posedge pixclk) vSync <= (CounterY>=490) && (CounterY<492);
 // managa address and fetch data
 always @(posedge pixclk)
   begin
-    if(CounterY[9:8] != 0)
+    if(CounterY[9:8+dbl_y] != 0)
       dispAddr <= 0;
     else
-      if(CounterX[9:8] == 0 && CounterX[2:0] == 0) // CounterX <= 255
-        dispAddr <= dispAddr + 1;
+      begin
+        // lower bits of address (32 bytes) always increment
+        // when X counter is < 256 or 512 and modulo 8 or 16 = 0
+        if(CounterX[9:8+dbl_x] == 0 && CounterX[2+dbl_x:0] == 0)
+          dispAddr[4:0] <= dispAddr[4:0] + 1;
+        // after 1 or 2 identical lines skip to next 32 bytes
+        // choose any X pixel before next even Y line
+        // as the moment to increment upper bits of address
+        if((dbl_y == 0 || CounterY[0] == 1) && CounterX == 512)
+          dispAddr[12:5] <= dispAddr[12:5] + 1;
+      end
   end
 
 reg [7:0] shiftData;
 always @(posedge pixclk)
   begin
-    shiftData <= (CounterX[2:0] == 0 && CounterX[9:8] == 0 && CounterY[9:8] == 0) ? dispData : shiftData[7:1];
+    if(dbl_x == 0 || CounterX[0] == 0)
+      shiftData <= (CounterX[2+dbl_x:0] == 0 && CounterX[9:8+dbl_x] == 0 && CounterY[9:8+dbl_y] == 0) ? dispData : shiftData[7:1];
   end
 
 wire [7:0] colorValue;
