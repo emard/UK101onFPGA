@@ -10,6 +10,7 @@ module HDMI_OraoGraphDisplay8K(
         input wire clk_tmds, /* 250 MHz */
         output reg [12:0] dispAddr,
         input wire [7:0] dispData,
+        output wire vga_video, vga_hsync, vga_vsync,
 	output wire [2:0] TMDS_out_RGB
 	// output wire TMDS_out_CLK is the same as pixel clock
 );
@@ -57,6 +58,11 @@ always @(posedge pixclk)
 
 wire [7:0] colorValue;
 assign colorValue = shiftData[0] == 0 ? 0 : 255;
+
+// attempt to generate monochrome VGA signal
+assign vga_video = shiftData[0];
+assign vga_hsync = hSync;
+assign vga_vsync = vSync;
 
 ////////////////
 wire [7:0] W = {8{CounterX[7:0]==CounterY[7:0]}};
