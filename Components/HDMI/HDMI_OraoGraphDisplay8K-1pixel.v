@@ -15,8 +15,8 @@ module HDMI_OraoGraphDisplay8K(
 );
 
 parameter test_picture = 0;
-parameter dbl_x = 1; // 0-normal X, 1-double X
-parameter dbl_y = 1; // 0-normal Y, 1-double Y
+parameter dbl_x = 0; // 0-normal X, 1-double X
+parameter dbl_y = 0; // 0-normal Y, 1-double Y
 
 ////////////////////////////////////////////////////////////////////////
 
