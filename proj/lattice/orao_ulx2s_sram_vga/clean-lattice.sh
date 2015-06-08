@@ -28,7 +28,7 @@ SYMLINK="${SYMLINK} \
   ../../../Components/PS2KB/ps2_intf.vhd \
   ../../../Components/PS2KB/orao_keyboard_buttons.vhd \
   ../../../Components/UART/bufferedUART.vhd \
-  ../../../Components/HDMI/HDMI_OraoGraphDisplay8K-1pixel.v \
+  ../../../Components/HDMI/HDMI_OraoGraphDisplay8K.v \
   "
 #  ../../../lattice/lattice_OraoBAS13.vhd \
 #  ../../../lattice/OraoBAS.vhd \
