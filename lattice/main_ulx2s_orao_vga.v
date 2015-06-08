@@ -85,8 +85,13 @@ orao
   .key_enter(btn_center),
   .key_b(btn_left),
   .key_c(btn_right),
-  .ps2clk(1'b1),
-  .ps2data(1'b1),
+  .ps2clk(pin_8),
+  .ps2data(pin_9),
+  .sram_lbl(sram_lbl),
+  .sram_ubl(sram_ubl),
+  .sram_wel(sram_wel),
+  .sram_a(sram_a),
+  .sram_d(sram_d),
   .videoAddr(dispAddr), // input from video
   .videoData(dispData)  // output to video
 );
@@ -107,12 +112,14 @@ HDMI_OraoGraphDisplay8K
 );
 
 // video output to 3.5mm jack
+/*
 wire composite_sync;
 assign composite_sync = ~(vga_vsync || vga_hsync);
 assign p_tip[3] = vga_video;
 assign p_tip[2] = composite_sync;
 assign p_tip[1] = 0;
 assign p_tip[0] = composite_sync;
+*/
 
 // show video on LED for some coarse optical debugging
 assign led[0] = vga_video;
