@@ -3,6 +3,8 @@
 ////////////////////////////////////////////////////////////////////////
 module main_orao(
         input Clk_50MHz,
+        input rs232_rx,
+        output rs232_tx,
         output [7:0] LEDS,
 	output [2:0] TMDS_out_P, TMDS_out_N,
 	output TMDS_out_CLK_P, TMDS_out_CLK_N
@@ -67,6 +69,8 @@ orao
   .key_enter(key_enter),
   .key_b(key_b),
   .key_c(key_c),
+  .rxd(rs232_rx),
+  .txd(rs232_tx),
   .ps2clk(1'b1),
   .ps2data(1'b1),
   .videoAddr(dispAddr), // input from video
