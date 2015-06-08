@@ -146,8 +146,14 @@ on screen:
 
 # ORAO 32K RAM 256x256 screen Scarab Hardware miniSpartan6+ xilinx XC6SLX25
 
-It works on XC6SLX25 based board with HDMI output.
-Should also work on smaller FPGA like XC6SLX9 (untested).
+It works on XC6SLX25 based board with HDMI output connected
+over HDMI-DVI connector to monitor. Haven't tested with true
+HDMI input device.
+
+It actually displays 256x240 pixels, bottom 2 text lines
+currently not visible.
+
+Should work the same on smaller FPGA like XC6SLX9 (untested).
 
 # Online documentation
 
