@@ -26,11 +26,8 @@ parameter dbl_y = 0; // 0-normal Y, 1-double Y
 
 ////////////////////////////////////////////////////////////////////////
 
-wire clk_TMDS;
-wire pixclk;
-
-assign clk_TMDS = clk_tmds; // 250 MHz
-assign pixclk = clk_pixel;  //  25 MHz
+wire clk_TMDS = clk_tmds; // 250 MHz
+wire pixclk = clk_pixel;  //  25 MHz
 
 // 125MHz * 2 / 10 = 25 MHz
 // DCM_SP #(.CLKFX_MULTIPLY(2), .CLKFX_DIVIDE(10)) DCM_pixclk_inst(.CLKIN(clk_125m), .CLKFX(DCM_pixclk_CLKFX), .RST(1'b0));
@@ -47,10 +44,15 @@ always @(posedge pixclk) if(CounterX==799) CounterY <= (CounterY==524) ? 0 : Cou
 always @(posedge pixclk) hSync <= (CounterX>=656) && (CounterX<752);
 always @(posedge pixclk) vSync <= (CounterY>=490) && (CounterY<492);
 
-// dispAddr contains starting address of the character
-// CounterY is address of the byte in the character
+// char addr consists from fetched data and lower 3 bits of Y scan line 0..7
 assign charAddr = {dispData[7:0], CounterY[2+dbl_y:dbl_y]};
-assign dispAddr = {CounterY[7+dbl_y:3+dbl_y], CounterX[8+dbl_x:3+dbl_x]};
+// dispAddr contains starting address of the character
+wire [5:0] addr_x_part = CounterX[8+dbl_x:3+dbl_x];
+wire [4:0] addr_y_part = CounterY[7+dbl_y:3+dbl_y];
+assign dispAddr = {addr_y_part, addr_x_part};
+
+wire [4:0] latency;
+assign latency[dbl_x+3] = 1'b1;
 
 // reverse char bits
 wire [7:0] charData_r;
@@ -58,14 +60,13 @@ genvar i;
 for (i=0; i<8; i=i+1) assign charData_r[i] = charData[7-i];
 
 reg [7:0] shiftData;
-always @(posedge pixclk)
+always @(negedge pixclk)
   begin
     if(dbl_x == 0 || CounterX[0] == 0)
-      shiftData <= (CounterX[2+dbl_x:0] == 0 && CounterX[9:8+dbl_x] == 0 && CounterY[9:8+dbl_y] == 0) ? charData_r : shiftData[7:1];
+      shiftData <= (CounterX[2+dbl_x:0] == 0 && (CounterX >= latency && CounterX < 512+latency) && CounterY[9:8+dbl_y] == 0) ? charData_r : shiftData[7:1];
   end
 
-wire [7:0] colorValue;
-assign colorValue = shiftData[0] == 0 ? 0 : 255;
+wire [7:0] colorValue = shiftData[0] == 0 ? 0 : 255;
 
 // attempt to generate monochrome VGA signal
 assign vga_video = shiftData[0];
