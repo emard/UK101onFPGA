@@ -52,11 +52,16 @@ always @(posedge pixclk) vSync <= (CounterY>=490) && (CounterY<492);
 assign charAddr = {dispData[7:0], CounterY[2+dbl_y:dbl_y]};
 assign dispAddr = {CounterY[7+dbl_y:3+dbl_y], CounterX[8+dbl_x:3+dbl_x]};
 
+// reverse char bits
+wire [7:0] charData_r;
+genvar i;
+for (i=0; i<8; i=i+1) assign charData_r[i] = charData[7-i];
+
 reg [7:0] shiftData;
 always @(posedge pixclk)
   begin
     if(dbl_x == 0 || CounterX[0] == 0)
-      shiftData <= (CounterX[2+dbl_x:0] == 0 && CounterX[9:8+dbl_x] == 0 && CounterY[9:8+dbl_y] == 0) ? charData : shiftData[7:1];
+      shiftData <= (CounterX[2+dbl_x:0] == 0 && CounterX[9:8+dbl_x] == 0 && CounterY[9:8+dbl_y] == 0) ? charData_r : shiftData[7:1];
   end
 
 wire [7:0] colorValue;
