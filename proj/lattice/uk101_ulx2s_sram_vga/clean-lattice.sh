@@ -26,7 +26,7 @@ SYMLINK="${SYMLINK} \
   ../../../Components/M6502/T65_Pack.vhd \
   ../../../Components/TV/OraoGraphDisplay8K.vhd \
   ../../../Components/PS2KB/ps2_intf.vhd \
-  ../../../Components/PS2KB/orao_keyboard_buttons.vhd \
+  ../../../Components/PS2KB/UK101keyboard_buttons.vhd \
   ../../../Components/UART/bufferedUART.vhd \
   ../../../Components/HDMI/HDMI_OraoGraphDisplay8K.v \
   "

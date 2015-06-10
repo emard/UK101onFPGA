@@ -86,6 +86,7 @@ architecture struct of uk101va is
 	signal serialClock	: std_logic;
 
 	signal kbReadData 	: std_logic_vector(7 downto 0);
+	signal kbRowSel         : std_logic_vector(7 downto 0);
 	
 	signal uart_n_wr        : std_logic;
 	signal uart_n_rd        : std_logic;
@@ -286,19 +287,23 @@ begin
 	);
 	end generate;
 	
-	
-        keyboard: if true generate
-	u9 : entity work.orao_keyboard_buttons
+	u9 : entity work.UK101keyboard_buttons
 	port map(
 		CLK       => clk,
 		nRESET    => n_reset,
-		PS2_CLK	  => ps2clk,
-		PS2_DATA  => ps2data,
-		key_b     => key_b,
+		PS2_CLK	  => ps2Clk,
+		PS2_DATA  => ps2Data,
 		key_c     => key_c,
 		key_enter => key_enter,
-		A	  => cpuAddress(10 downto 0),
-		Q	  => kbReadData
+		A	  => kbRowSel,
+		KEYB	  => kbReadData
 	);
-	end generate;
+       
+	process (n_kbCS,n_memWR)
+	begin
+		if	n_kbCS='0' and n_memWR = '0' then
+			kbRowSel <= cpuDataOut;
+		end if;
+	end process;
+
 end;
