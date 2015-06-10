@@ -5,7 +5,8 @@ USE ieee.std_logic_1164.all;
 
 ENTITY ROMgeneric IS
         generic(
-                filename        : string
+                filename        : string;
+                rom_bytes       : integer
         );
 	PORT
 	(
@@ -20,7 +21,8 @@ ARCHITECTURE SYN OF ROMgeneric IS
 
   component rom_generic
     generic (
-      filename     : string
+      filename     : string;
+      rom_bytes    : integer
     );
     port (
       clock        : in  std_logic;
@@ -32,7 +34,8 @@ ARCHITECTURE SYN OF ROMgeneric IS
 BEGIN
   basic_rom: rom_generic
   generic map(
-    filename => filename
+    filename => filename,
+    rom_bytes => rom_bytes
   )
   port map(
     clock => clock,
