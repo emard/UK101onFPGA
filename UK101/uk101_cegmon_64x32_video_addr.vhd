@@ -26,11 +26,12 @@ use  IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity uk101va is
         generic (
-          model : string := "";
+          model : string := "101";
+          cegmon : string := "video"; -- use "video" or "serial"
           ram_kb: integer := 24; -- KB RAM this computer will have
           external_sram : integer := 1; -- 0: on-chip internal BRAM  1: external SRAM
           clk_mhz : integer := 25; -- clock freq in MHz
-          serial_baud : integer := 9600 -- output serial baudrate
+          serial_baud : integer := 19200 -- output serial baudrate
         );
 	port(
 		n_reset		: in std_logic;
@@ -158,7 +159,7 @@ begin
 
 	u2b : entity work.ROMgeneric -- 2KB
 	generic map(
-                filename => "uk" & model & "cegmon_serial.vhex",
+                filename => "uk" & model & "cegmon_" & cegmon & ".vhex",
                 rom_bytes => 2048
 	)
 	port map(
