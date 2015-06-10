@@ -12,7 +12,7 @@
 module HDMI_UK101TextDisplay2K(
         input wire clk_pixel, /* 25 MHz */
         input wire clk_tmds, /* 250 MHz (set to 0 for VGA-only) */
-        output reg [12:0] dispAddr,
+        output wire [12:0] dispAddr,
         input wire [7:0] dispData,
         output wire [10:0] charAddr,
         input wire [7:0] charData,
@@ -49,30 +49,8 @@ always @(posedge pixclk) vSync <= (CounterY>=490) && (CounterY<492);
 
 // dispAddr contains starting address of the character
 // CounterY is address of the byte in the character
-assign charAddr = {dispData[7:0], CounterY[2:0]};
-
-// managa address and fetch data
-always @(posedge pixclk)
-  begin
-    if(CounterY[9:8+dbl_y] != 0)
-    begin
-      dispAddr <= 0;
-    end
-    else
-      begin
-        // lower bits of address (32 bytes) always increment
-        // when X counter is < 256 or 512 and modulo 8 or 16 = 0
-        if(CounterX[9:8+dbl_x] == 0 && CounterX[2+dbl_x:0] == 0)
-        begin
-          dispAddr[4:0] <= dispAddr[4:0] + 1;
-        end
-        // after 8 or 16 identical Y lines skip to next 32 bytes
-        // choose any X pixel before next even Y line
-        // as the moment to increment upper bits of address
-        if( (CounterY[2+dbl_y:0] == 0) && CounterX == 512)
-          dispAddr[12:5] <= dispAddr[12:5] + 1;
-      end
-  end
+assign charAddr = {dispData[7:0], CounterY[2+dbl_y:dbl_y]};
+assign dispAddr = {CounterY[7+dbl_y:3+dbl_y], CounterX[8+dbl_x:3+dbl_x]};
 
 reg [7:0] shiftData;
 always @(posedge pixclk)
