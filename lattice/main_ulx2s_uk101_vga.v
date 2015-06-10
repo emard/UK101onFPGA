@@ -77,6 +77,7 @@ uk101va
   .clk_mhz(25),  // MHz clock frequency
   .ram_kb(24),   // KB program RAM memory (up to 24 in steps of 4)
   .external_sram(1), // use external SRAM for program RAM
+  .cegmon("serial"), // use "serial" or "video" cegmon
   .model("101")  // UK101 model "101"
 )
 (
