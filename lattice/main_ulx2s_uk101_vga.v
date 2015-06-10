@@ -39,7 +39,7 @@ pll_25M_50M(
 
 // assign led[7:0] = 8'h55; // display fixed LED pattern
 
-wire [12:0] dispAddr;
+wire [10:0] dispAddr;
 wire [7:0] dispData;
 wire [10:0] charAddr;
 wire [7:0] charData;
@@ -126,16 +126,6 @@ rom_generic
   .addr(charAddr),
   .data(charData)
 );
-
-// video output to 3.5mm jack
-/*
-wire composite_sync;
-assign composite_sync = ~(vga_vsync || vga_hsync);
-assign p_tip[3] = vga_video;
-assign p_tip[2] = composite_sync;
-assign p_tip[1] = 0;
-assign p_tip[0] = composite_sync;
-*/
 
 // show video on LED for some coarse optical debugging
 assign led[0] = vga_video;

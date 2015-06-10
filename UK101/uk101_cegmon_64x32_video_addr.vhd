@@ -39,8 +39,8 @@ entity uk101va is
 		rxd		: in std_logic;
 		txd		: out std_logic;
 		rts		: out std_logic;
-                videoAddr       : in std_logic_vector(12 downto 0);
-                videoData       : out std_logic_vector(7 downto 0);
+                videoAddr       : in std_logic_vector(10 downto 0); -- second port of dual port RAM
+                videoData       : out std_logic_vector(7 downto 0); -- returns value of dual port RAM
 		sram_wel, sram_lbl, sram_ubl: out std_logic; -- onboard external SRAM
 		sram_a          : out std_logic_vector(18 downto 0);
 		sram_d          : inout std_logic_vector(15 downto 0); 
@@ -273,20 +273,6 @@ begin
 	);
 	end generate;
 
-        romtest: if false generate
-	u8_testrom: entity work.ROMgeneric
-	generic map(
-           filename => "bas" & model & ".vhex"
-	)
-	port map
-	(
-		clock => clk,
-		ro_port_addr(15 downto 13) => (others => '0'),
-		ro_port_addr(12 downto 0) => videoAddr,
-		ro_port_data_out => dispRamDataOutB
-	);
-	end generate;
-	
 	u9 : entity work.UK101keyboard_buttons
 	port map(
 		CLK       => clk,
