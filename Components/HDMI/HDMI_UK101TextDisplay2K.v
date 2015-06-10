@@ -66,10 +66,10 @@ always @(posedge pixclk)
         begin
           dispAddr[4:0] <= dispAddr[4:0] + 1;
         end
-        // after 1 or 2 identical lines skip to next 32 bytes
+        // after 8 or 16 identical Y lines skip to next 32 bytes
         // choose any X pixel before next even Y line
         // as the moment to increment upper bits of address
-        if((dbl_y == 0 || CounterY[0] == 1) && CounterX == 512)
+        if( (CounterY[2+dbl_y:0] == 0) && CounterX == 512)
           dispAddr[12:5] <= dispAddr[12:5] + 1;
       end
   end

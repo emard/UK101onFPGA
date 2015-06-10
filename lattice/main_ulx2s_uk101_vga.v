@@ -108,7 +108,7 @@ HDMI_UK101TextDisplay2K
   .clk_pixel(clk_pixel),
   .clk_tmds(clk_tmds),
   .dispAddr(dispAddr), // output from video
-  .dispData(dispData), // input to video
+  .dispData(dispData),    // dispData input to video
   .charAddr(charAddr), // output from video
   .charData(charData), // input to video
   .vga_video(vga_video),
