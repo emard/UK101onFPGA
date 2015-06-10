@@ -41,6 +41,8 @@ pll_25M_50M(
 
 wire [12:0] dispAddr;
 wire [7:0] dispData;
+wire [10:0] charAddr;
+wire [7:0] charData;
 
 parameter reset_period_width = 27;
 
@@ -98,7 +100,7 @@ uk101va
 );
 
 wire vga_video, vga_hsync, vga_vsync;
-HDMI_OraoGraphDisplay8K
+HDMI_UK101TextDisplay2K
 #(
   .test_picture(0)  // 0-disable 1-enable test picture
 )
@@ -107,9 +109,22 @@ HDMI_OraoGraphDisplay8K
   .clk_tmds(clk_tmds),
   .dispAddr(dispAddr), // output from video
   .dispData(dispData), // input to video
+  .charAddr(charAddr), // output from video
+  .charData(charData), // input to video
   .vga_video(vga_video),
   .vga_vsync(vga_vsync),
   .vga_hsync(vga_hsync)
+);
+
+rom_generic
+#(
+  .filename("character.vhex"),
+  .rom_bytes(2048)
+)
+(
+  .clock(clk_pixel),
+  .addr(charAddr),
+  .data(charData)
 );
 
 // video output to 3.5mm jack

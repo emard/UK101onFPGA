@@ -24,11 +24,10 @@ SYMLINK="${SYMLINK} \
   ../../../Components/M6502/T65.vhd \
   ../../../Components/M6502/T65_MCode.vhd \
   ../../../Components/M6502/T65_Pack.vhd \
-  ../../../Components/TV/OraoGraphDisplay8K.vhd \
   ../../../Components/PS2KB/ps2_intf.vhd \
   ../../../Components/PS2KB/UK101keyboard_buttons.vhd \
   ../../../Components/UART/bufferedUART.vhd \
-  ../../../Components/HDMI/HDMI_OraoGraphDisplay8K.v \
+  ../../../Components/HDMI/HDMI_UK101TextDisplay2K.v \
   "
 
 #  ../../../orao/orao_video_addr.vhd \
@@ -103,3 +102,4 @@ cat ../../common/project.ldf.last
 ../../../../generic/convbin2vhex.sh ../../../../UK101/uk101basic.rom uk101basic.vhex
 ../../../../generic/convbin2vhex.sh ../../../../UK101/uk101cegmon_serial.rom uk101cegmon_serial.vhex
 ../../../../generic/convbin2vhex.sh ../../../../UK101/uk101cegmon_64x32.rom uk101cegmon_64x32.vhex
+../../../../generic/convbin2vhex.sh ../../../../UK101/character.rom character.vhex
