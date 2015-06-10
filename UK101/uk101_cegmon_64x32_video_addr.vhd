@@ -252,7 +252,7 @@ begin
 	
 	-- test grid on screen during the reset is pressed
 	videoData <= dispRamDataOutB when n_reset = '1'
-	        else test_pattern(conv_integer(videoAddr(7 downto 5)));
+	        else videoAddr(7 downto 0);
 	
 	videobram: if true generate
 	u8_generic: entity work.bram_2port
