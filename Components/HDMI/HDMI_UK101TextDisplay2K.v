@@ -12,7 +12,7 @@
 module HDMI_UK101TextDisplay2K(
         input wire clk_pixel, /* 25 MHz */
         input wire clk_tmds, /* 250 MHz (set to 0 for VGA-only) */
-        output wire [12:0] dispAddr,
+        output wire [10:0] dispAddr,
         input wire [7:0] dispData,
         output wire [10:0] charAddr,
         input wire [7:0] charData,
