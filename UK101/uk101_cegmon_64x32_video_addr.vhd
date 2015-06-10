@@ -144,10 +144,9 @@ begin
 		DI => cpuDataIn,
 		DO => cpuDataOut);
 
-        iroms: if true generate
 	u2 : entity work.ROMgeneric -- 8KB
 	generic map(
-                filename => "uk101basic" & model & ".vhex",
+                filename => "uk" & model & "basic.vhex",
                 rom_bytes => 8192
 	)
 	port map(
@@ -159,7 +158,7 @@ begin
 
 	u2b : entity work.ROMgeneric -- 2KB
 	generic map(
-                filename => "uk101cegmon" & model & ".vhex",
+                filename => "uk" & model & "cegmon_serial.vhex",
                 rom_bytes => 2048
 	)
 	port map(
@@ -168,7 +167,6 @@ begin
                 ro_port_addr(10 downto 0) => cpuAddress(10 downto 0),
                 ro_port_data_out => monitorRomData
 	);
-	end generate;
 	
         inst_internal_bram: if external_sram = 0 generate
 	u3: entity work.bram_1port
@@ -288,7 +286,7 @@ begin
 	end generate;
 	
 	
-        keyboard: if false generate
+        keyboard: if true generate
 	u9 : entity work.orao_keyboard_buttons
 	port map(
 		CLK       => clk,

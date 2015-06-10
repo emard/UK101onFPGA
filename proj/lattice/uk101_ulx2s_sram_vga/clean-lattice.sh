@@ -98,7 +98,7 @@ cat ../../common/project.ldf.last
 ) > project.ldf
 
 # now convert ROMs
-../../../../generic/convbin2vhex.sh ../../../../orao/BAS103.ROM bas103.vhex
-../../../../generic/convbin2vhex.sh ../../../../orao/CRT103.ROM crt103.vhex
-../../../../generic/convbin2vhex.sh ../../../../orao/BAS102.ROM bas102.vhex
-../../../../generic/convbin2vhex.sh ../../../../orao/CRT102.ROM crt102.vhex
+# warning! if rom initialization file not fouund lattice
+# will continue without error, just not synthesizing the rom
+../../../../generic/convbin2vhex.sh ../../../../UK101/uk101basic.rom uk101basic.vhex
+../../../../generic/convbin2vhex.sh ../../../../UK101/uk101cegmon_serial.rom uk101cegmon_serial.vhex
