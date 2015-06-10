@@ -102,3 +102,4 @@ cat ../../common/project.ldf.last
 # will continue without error, just not synthesizing the rom
 ../../../../generic/convbin2vhex.sh ../../../../UK101/uk101basic.rom uk101basic.vhex
 ../../../../generic/convbin2vhex.sh ../../../../UK101/uk101cegmon_serial.rom uk101cegmon_serial.vhex
+../../../../generic/convbin2vhex.sh ../../../../UK101/uk101cegmon_64x32.rom uk101cegmon_64x32.vhex
