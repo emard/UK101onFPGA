@@ -49,7 +49,7 @@ always @(posedge pixclk) vSync <= (CounterY>=490) && (CounterY<492);
 
 // dispAddr contains starting address of the character
 // CounterY is address of the byte in the character
-assign charAddr = {dispAddr[7:0], CounterY[2:0]}; 
+assign charAddr = {dispData[7:0], CounterY[2:0]};
 
 // managa address and fetch data
 always @(posedge pixclk)
