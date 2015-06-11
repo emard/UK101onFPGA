@@ -137,8 +137,8 @@ assign led[1] = vga_vsync;
 assign led[2] = vga_hsync;
 
 // show rs232 tx/rx on leds
-assign led[4] = rs232_tx;
-assign led[5] = rs232_rx;
+assign led[4] = ~rs232_tx;
+assign led[5] = ~rs232_rx;
 
 assign pin_37 = vga_video; // r msb
 assign pin_36 = vga_video; // r
