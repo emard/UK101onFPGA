@@ -4,8 +4,8 @@
 module main(
         input  wire clk_25MHz,
         input  wire btn_center, btn_up, btn_down, btn_left, btn_right;
-        output wire pin_2; // txd
-        input  wire pin_3; // rxd
+        output wire rs232_tx; // txd
+        input  wire rs232_rx; // rxd
         output wire pin_4; // rts
         input  wire pin_8; // ps2clk
         input  wire pin_9; // ps2data
@@ -79,7 +79,7 @@ uk101va
   .clk_mhz(25),  // MHz clock frequency
   .ram_kb(40),   // KB program RAM memory (up to 40 in steps of 4)
   .external_sram(1), // use external SRAM for program RAM
-  .cegmon("64x32"), // use "serial" or "64x32" for cegmon
+  .cegmon("serial"), // use "serial" or "64x32" for cegmon
   .model("101")  // UK101 model "101"
 )
 (
@@ -90,6 +90,8 @@ uk101va
   .key_c(btn_right),
   .ps2clk(pin_8),
   .ps2data(pin_9),
+  .txd(rs232_tx),
+  .rxd(rs232_rx),
   .sram_lbl(sram_lbl),
   .sram_ubl(sram_ubl),
   .sram_wel(sram_wel),
@@ -133,6 +135,10 @@ rom_generic
 assign led[0] = vga_video;
 assign led[1] = vga_vsync;
 assign led[2] = vga_hsync;
+
+// show rs232 tx/rx on leds
+assign led[4] = rs232_tx;
+assign led[5] = rs232_rx;
 
 assign pin_37 = vga_video; // r msb
 assign pin_36 = vga_video; // r
