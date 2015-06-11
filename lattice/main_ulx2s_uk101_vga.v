@@ -102,6 +102,8 @@ uk101va
 wire vga_video, vga_hsync, vga_vsync;
 HDMI_UK101TextDisplay2K
 #(
+  .dbl_x(0),
+  .dbl_y(0),
   .test_picture(0)  // 0-disable 1-enable test picture
 )
 (

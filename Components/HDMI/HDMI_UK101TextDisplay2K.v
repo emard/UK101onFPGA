@@ -51,8 +51,7 @@ wire [5:0] addr_x_part = CounterX[8+dbl_x:3+dbl_x];
 wire [4:0] addr_y_part = CounterY[7+dbl_y:3+dbl_y];
 assign dispAddr = {addr_y_part, addr_x_part};
 
-wire [4:0] latency;
-assign latency[dbl_x+3] = 1'b1;
+parameter latency = 8; // latency 8 bits width (1 character)
 
 // reverse char bits
 wire [7:0] charData_r;
@@ -62,8 +61,12 @@ for (i=0; i<8; i=i+1) assign charData_r[i] = charData[7-i];
 reg [7:0] shiftData;
 always @(negedge pixclk)
   begin
-    if(dbl_x == 0 || CounterX[0] == 0)
-      shiftData <= (CounterX[2+dbl_x:0] == 0 && (CounterX >= latency && CounterX < 512+latency) && CounterY[9:8+dbl_y] == 0) ? charData_r : shiftData[7:1];
+    if(dbl_x == 0 || CounterX[0] == 0) // widen char
+      shiftData <=  CounterX[2+dbl_x:0] == 0 // every char
+                && CounterX >= (latency<<dbl_x) // start showing from column 1, X at data fetch latency
+                && CounterX < ((512+latency)<<dbl_x) // max 64 text chars width shown on screen
+                && CounterY[9:8+dbl_y] == 0 // start of text row
+                 ? charData_r : shiftData[7:1];
   end
 
 wire [7:0] colorValue = shiftData[0] == 0 ? 0 : 255;
