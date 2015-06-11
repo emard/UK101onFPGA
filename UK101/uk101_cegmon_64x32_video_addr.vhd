@@ -102,10 +102,7 @@ begin
         n_dispRamCS <= '0' when cpuAddress(15 downto 11) = "11010" else '1'; --2k
         n_basRomCS <= '0' when cpuAddress(15 downto 13) = "101" else '1'; --8k
         n_monitorRomCS <= '0' when cpuAddress(15 downto 11) = "11111" else '1'; --2K
-        n_ramCS <= '0' when
-                   cpuAddress(15 downto 12) >= x"0"
-	       and cpuAddress(15 downto 12) <= x"9"
-              else '1';
+        n_ramCS <= '0' when cpuAddress(15 downto 12) < ram_kb/4 else '1';
 	n_aciaCS <= '0' when cpuAddress(15 downto 1) = "111100000000000" else '1';
 	n_kbCS <= '0' when cpuAddress(15 downto 10) = "110111" else '1';
  
