@@ -77,7 +77,7 @@ assign key_enter = autotype == 6
 uk101va
 #(
   .clk_mhz(25),  // MHz clock frequency
-  .ram_kb(24),   // KB program RAM memory (up to 24 in steps of 4)
+  .ram_kb(40),   // KB program RAM memory (up to 40 in steps of 4)
   .external_sram(1), // use external SRAM for program RAM
   .cegmon("64x32"), // use "serial" or "64x32" for cegmon
   .model("101")  // UK101 model "101"
