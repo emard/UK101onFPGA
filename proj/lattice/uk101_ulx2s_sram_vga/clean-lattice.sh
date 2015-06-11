@@ -11,8 +11,6 @@ SYMLINK="${SYMLINK} \
   ../common/build.sh ../common/build.tcl \
   ../../../lattice/lattice_pll_25M_50M.vhd \
   ../../../lattice/pll_25M_50M.vhd \
-  ../../../lattice/lattice_ProgRam.vhd \
-  ../../../lattice/ProgRam.vhd \
   ../../../lattice/main_ulx2s_uk101_vga.v \
   ../../../UK101/uk101_cegmon_64x32_video_addr.vhd \
   ../../../generic/ROMgeneric.vhd \
