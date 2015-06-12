@@ -176,7 +176,7 @@ UK101
 
 board  | compiles | Composite | VGA  | HDMI
 -------|----------|-----------|------|------
-ULX2s  |   YES    |    YES    | YES* |
+ULX2S  |   YES    |    YES    | YES* |
 TB276  |   YES    |           |      |
 
 
@@ -184,7 +184,7 @@ ORAO
 
 board  | compiles | Composite | VGA  | HDMI
 -------|----------|-----------|------|------
-ULX2s  |   YES    |    YES    | YES* |
+ULX2S  |   YES    |    YES    | YES* |
 SCARAB |   YES    |           |      | YES
 
 
