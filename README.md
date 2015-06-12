@@ -155,6 +155,41 @@ currently not visible.
 
 Should work the same on smaller FPGA like XC6SLX9 (untested).
 
+# Hardware support summary
+
+Here is listed of boards what is verified that works.
+
+The board, does it compile, and what video output it
+can generate.
+
+Many vendor specific modules have been re-written into
+generic VHDL or VERILOG to ease effort when porting
+to other FPGA boards. If some feature for some board 
+is not listed it probably can be supported with some 
+programming and testing, contributions are very welcome :-).
+
+
+UK101
+
+board  | compiles | Composite | VGA  | HDMI
+-------|----------|-----------|------|------
+ULX2s  |   YES    |    YES    | YES* |
+TB276  |   YES    |           |      |
+
+
+ORAO
+
+board  | compiles | Composite | VGA  | HDMI
+-------|----------|-----------|------|------
+ULX2s  |   YES    |    YES    | YES* |
+SCARAB |   YES    |           |      | YES
+
+
+* board can generate VGA signal but needs 
+  external connector or breakout board and 
+  few resistors
+
+
 # Online documentation
 
 CEGMON manual:
