@@ -168,6 +168,9 @@ to other FPGA boards. If some feature for some board
 is not listed it probably can be supported with some 
 programming and testing, contributions are very welcome :-).
 
+VGA and HDMI code is now unified, so same code
+is generating both video formats. If something
+does VGA it could also do HDMI and vv.
 
 UK101
 
