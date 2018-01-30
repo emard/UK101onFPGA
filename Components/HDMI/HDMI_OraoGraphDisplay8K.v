@@ -14,7 +14,7 @@ module HDMI_OraoGraphDisplay8K(
         input wire clk_tmds, /* 250 MHz (set to 0 for VGA-only) */
         output reg [12:0] dispAddr,
         input wire [7:0] dispData,
-        output wire vga_video, vga_hsync, vga_vsync,
+        output wire vga_video, vga_hsync, vga_vsync, vga_blank,
 	output wire [2:0] TMDS_out_RGB
 );
 
@@ -78,6 +78,7 @@ assign colorValue = shiftData[0] == 0 ? 0 : 255;
 assign vga_video = shiftData[0];
 assign vga_hsync = hSync;
 assign vga_vsync = vSync;
+assign vga_blank = ~DrawArea;
 
 ////////////////
 wire [7:0] W = {8{CounterX[7:0]==CounterY[7:0]}};
