@@ -139,28 +139,41 @@ begin
 		DO => cpuDataOut);
 			
 
-	u2 : entity work.ROMgeneric -- 8KB
-	generic map(
-	        filename => "bas" & model & ".vhex"
-	)
+	--u2 : entity work.ROMgeneric -- 8KB
+	--generic map(
+	--        filename => "bas" & model & ".vhex"
+	--)
+	--port map(
+	--	clock => clk,
+	--	ro_port_addr(15 downto 13) => (others => '0'),
+        --        ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+	--	ro_port_data_out => basRomData
+	--);
+
+	u2 : entity work.rom_bas -- 8KB
 	port map(
-		clock => clk,
-		ro_port_addr(15 downto 13) => (others => '0'),
-                ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
-		ro_port_data_out => basRomData
+		clk => clk,
+                addr(12 downto 0) => cpuAddress(12 downto 0),
+		data => basRomData
 	);
 
-	u2b : entity work.ROMgeneric -- 8KB
-	generic map(
-	        filename => "crt" & model & ".vhex"
-	)
+	--u2b : entity work.ROMgeneric -- 8KB
+	--generic map(
+	--        filename => "crt" & model & ".vhex"
+	--)
+	--port map(
+	--	clock => clk,
+	--	ro_port_addr(15 downto 13) => (others => '0'),
+	--	ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+	--	ro_port_data_out => monitorRomData
+	--);
+	u2b : entity work.rom_crt -- 8KB
 	port map(
-		clock => clk,
-		ro_port_addr(15 downto 13) => (others => '0'),
-		ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
-		ro_port_data_out => monitorRomData
+		clk => clk,
+                addr(12 downto 0) => cpuAddress(12 downto 0),
+		data => monitorRomData
 	);
-	
+
         inst_internal_bram: if external_sram = 0 generate
 	u3: entity work.bram_1port
 	generic map(
@@ -262,20 +275,6 @@ begin
 		ro_port_data_out => dispRamDataOutB
 	);
 
-        romtest: if false generate
-	u8_testrom: entity work.ROMgeneric
-	generic map(
-           filename => "bas" & model & ".vhex"
-	)
-	port map
-	(
-		clock => clk,
-		ro_port_addr(15 downto 13) => (others => '0'),
-		ro_port_addr(12 downto 0) => videoAddr,
-		ro_port_data_out => dispRamDataOutB
-	);
-	end generate;
-	
 	u9 : entity work.orao_keyboard_buttons
 	port map(
 		CLK       => clk,
