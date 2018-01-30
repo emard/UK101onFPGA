@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BaliProject version="3.2" title="project" device="LFE5U-45F-6BG381C" default_implementation="project">
+    <Options/>
+    <Implementation title="project" dir="project" description="project" synthesis="synplify" default_strategy="Strategy1">
+        <Options def_top="uk101_ulx3s" top="uk101_ulx3s"/>
+        <Source name="top/uk101_64x32_64K.vhd" type="VHDL" type_short="VHDL">
+            <Options top_module="uk101_ulx3s"/>
+        </Source>
+        <Source name="constraints/ulx3s_v18.lpf" type="Logic Preference" type_short="LPF">
+            <Options/>
+        </Source>
+        <Source name="clocks/clk_25_100_125_25.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../UK101/uk101_cegmon_64x32_video_addr.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../UK101/rom_basic_uk101.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../UK101/CharRom.VHD" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../UK101/CegmonRom_64x32.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../generic/bram_1port.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../generic/bram_2port.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../generic/ProgSRam.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/M6502/T65_ALU.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/M6502/T65.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/M6502/T65_MCode.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/M6502/T65_Pack.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/TV/UK101TextDisplay2K.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/PS2KB/ps2_intf.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/PS2KB/UK101keyboard.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/PS2KB/UK101keyboard_buttons.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/UART/bufferedUART.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../Components/HDMI/HDMI_UK101TextDisplay2K.v" type="Verilog" type_short="Verilog">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/osd/osd.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/osd/char_rom.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/generic/bram_true2p_1clk.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/vga/vga.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/vga/hdmi/vga2dvid.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/vga/hdmi/tmds_encoder.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/vga/hdmi_out.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/vga/hdmi/ddr_dvid_out_se.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/vga/lattice/ecp5u/ddr_out.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+        <Source name="../../../rtl_emard/spdif/spdif_tx.vhd" type="VHDL" type_short="VHDL">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="ulx3s_sram1.sty"/>
+</BaliProject>

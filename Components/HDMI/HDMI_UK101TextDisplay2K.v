@@ -16,7 +16,7 @@ module HDMI_UK101TextDisplay2K(
         input wire [7:0] dispData,
         output wire [10:0] charAddr,
         input wire [7:0] charData,
-        output wire vga_video, vga_hsync, vga_vsync,
+        output wire vga_video, vga_hsync, vga_vsync, vga_blank,
 	output wire [2:0] TMDS_out_RGB
 );
 
@@ -75,6 +75,7 @@ wire [7:0] colorValue = shiftData[0] == 0 ? 0 : 255;
 assign vga_video = shiftData[0];
 assign vga_hsync = hSync;
 assign vga_vsync = vSync;
+assign vga_blank = ~DrawArea;
 
 ////////////////
 wire [7:0] W = {8{CounterX[7:0]==CounterY[7:0]}};

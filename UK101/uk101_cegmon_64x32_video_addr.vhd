@@ -143,30 +143,43 @@ begin
 		DI => cpuDataIn,
 		DO => cpuDataOut);
 
-	u2 : entity work.ROMgeneric -- 8KB
-	generic map(
-                filename => "uk" & model & "basic.vhex",
-                rom_bytes => 8192
-	)
+	--u2 : entity work.ROMgeneric -- 8KB
+	--generic map(
+        --        filename => "uk" & model & "basic.vhex",
+        --        rom_bytes => 8192
+	--)
+	--port map(
+        --        clock => clk,
+        --        ro_port_addr(15 downto 13) => (others => '0'),
+        --        ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
+        --        ro_port_data_out => basRomData
+	--);
+
+	u2 : entity work.rom_basic_uk101 -- 8KB
 	port map(
-                clock => clk,
-                ro_port_addr(15 downto 13) => (others => '0'),
-                ro_port_addr(12 downto 0) => cpuAddress(12 downto 0),
-                ro_port_data_out => basRomData
+		clk => clk,
+                addr(12 downto 0) => cpuAddress(12 downto 0),
+		data => basRomData
 	);
 
-	u2b : entity work.ROMgeneric -- 2KB
-	generic map(
-                filename => "uk" & model & "cegmon_" & cegmon & ".vhex",
-                rom_bytes => 2048
-	)
+	--u2b : entity work.ROMgeneric -- 2KB
+	--generic map(
+        --        filename => "uk" & model & "cegmon_" & cegmon & ".vhex",
+        --        rom_bytes => 2048
+	--)
+	--port map(
+        --        clock => clk,
+        --        ro_port_addr(15 downto 11) => (others => '0'),
+        --        ro_port_addr(10 downto 0) => cpuAddress(10 downto 0),
+        --        ro_port_data_out => monitorRomData
+	--);
+	u2b : entity work.CegmonRom -- 2KB
 	port map(
-                clock => clk,
-                ro_port_addr(15 downto 11) => (others => '0'),
-                ro_port_addr(10 downto 0) => cpuAddress(10 downto 0),
-                ro_port_data_out => monitorRomData
+		--clk => clk,
+                address(10 downto 0) => cpuAddress(10 downto 0),
+		q => monitorRomData
 	);
-	
+
         inst_internal_bram: if external_sram = 0 generate
 	u3: entity work.bram_1port
 	generic map(
