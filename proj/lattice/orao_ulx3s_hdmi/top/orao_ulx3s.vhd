@@ -135,8 +135,8 @@ architecture struct of orao_ulx3s is
 	signal S_audio: std_logic_vector(23 downto 0) := (others => '0');
 	signal S_spdif_out: std_logic;
 begin
-  wifi_gpio0 <= '1'; -- setting to 0 will activate ESP32 loader
-  reset_n <= btn(0); -- btn(0) has inverted logic
+  wifi_gpio0 <= btn(0); -- holding reset for 2 sec will activate ESP32 loader
+  reset_n <= btn(0); -- btn(0) has inverted logic so direct to reset_n
 
   clkgen: entity work.clk_25_100_125_25
     port map
