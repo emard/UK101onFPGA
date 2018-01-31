@@ -103,7 +103,7 @@ begin
 	-- 0xA000, 0xAFFF, 'extension (maybe ROM cartridge)',
 	-- 0xB000, 0xBFFF, 'DOS',
 	-- 0xC000, 0xDFFF, 'BASIC ROM',
-	-- 0xE000, 0xFFFF, 'sisytem ROM',
+	-- 0xE000, 0xFFFF, 'system ROM',
 
 	n_dispRamCS <= '0' when cpuAddress(15 downto 13) = "011" else '1'; --8k @ 0x6000
 	n_basRomCS <= '0' when cpuAddress(15 downto 13) = "110" else '1'; --8k @ 0xC000
