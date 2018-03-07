@@ -88,10 +88,9 @@ port
   --flash_csn    : out     std_logic;
 
   -- SD card (SPI1)
-  sd_dat3_csn, sd_cmd_di, sd_dat0_do, sd_dat1_irq, sd_dat2: inout std_logic;
-  sd_clk: out std_logic;
-  sd_cdn, sd_wp: in std_logic
-	
+  sd_dat3_csn, sd_cmd_di, sd_dat0_do, sd_dat1_irq, sd_dat2: inout std_logic := 'Z';
+  sd_clk: inout std_logic := 'Z';
+  sd_cdn, sd_wp: inout std_logic := 'Z'
 );
 end;
 
