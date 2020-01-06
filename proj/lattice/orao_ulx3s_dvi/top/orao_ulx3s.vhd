@@ -102,6 +102,8 @@ architecture struct of orao_ulx3s is
 
 	alias ps2_clk : std_logic is usb_fpga_dp;
 	alias ps2_dat : std_logic is usb_fpga_dn;
+	--alias ps2_clk : std_logic is gp(11);
+	--alias ps2_dat : std_logic is gn(11);
 
         component hdmi_oraographdisplay8k is
         port
@@ -135,6 +137,8 @@ architecture struct of orao_ulx3s is
 begin
   wifi_gpio0 <= btn(0); -- holding reset for 2 sec will activate ESP32 loader
   reset_n <= btn(0); -- btn(0) has inverted logic so direct to reset_n
+  ftdi_rxd <= wifi_txd;
+  wifi_rxd <= ftdi_txd;
 
   clkgen: entity work.clk_25_100_125_25
     port map
@@ -177,8 +181,8 @@ begin
 	port map(
                 clk       => clk_pixel,
                 n_reset   => reset_n,
-		txd       => ftdi_rxd,
-		rxd       => ftdi_txd,
+		txd       => open, -- ftdi_rxd,
+		rxd       => '1',  -- ftdi_txd,
 		rts       => ftdi_nrts,
 		ps2Clk    => ps2_clk,
 		ps2Data   => ps2_dat,
