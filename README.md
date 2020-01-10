@@ -8,7 +8,7 @@ http://searle.hostei.com/grant/uk101FPGA/index.html
 
 UK101 is used as the base for emulating ORAO computer on FPGA.
 ![ORAO](/pic/orao.jpg)
-http://en.wikipedia.org/wiki/Orao_%28computer%29
+[ORAO wiki](http://en.wikipedia.org/wiki/Orao_%28computer%29)
 Here is also [Online ORAO emulator](http://orao.hrvoje.org/)
 
 ORAO was created as an upgrade of GALEB with 
