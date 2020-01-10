@@ -100,10 +100,12 @@ architecture struct of orao_ulx3s is
 
         signal reset_n: std_logic;
 
-	alias ps2_clk : std_logic is usb_fpga_dp;
-	alias ps2_dat : std_logic is usb_fpga_dn;
-	--alias ps2_clk : std_logic is gp(11);
-	--alias ps2_dat : std_logic is gn(11);
+        -- US2
+	--alias ps2_clk : std_logic is usb_fpga_dp;
+	--alias ps2_dat : std_logic is usb_fpga_dn;
+	-- ESP32 ps2tn.py or ps2recv.py
+	alias ps2_clk : std_logic is gp(11);
+	alias ps2_dat : std_logic is gn(11);
 
         component hdmi_oraographdisplay8k is
         port
