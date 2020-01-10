@@ -42,8 +42,8 @@ VHDL_FILES = \
   $(TOP_MODULE_FILE) \
   clocks/clk_25_100_125_25.vhd \
   ../../../orao/orao_video_addr.vhd \
-  ../../../orao/rom_bas102.vhd \
-  ../../../orao/rom_crt102.vhd \
+  ../../../orao/rom_bas103.vhd \
+  ../../../orao/rom_crt103.vhd \
   ../../../generic/bram_1port.vhd \
   ../../../generic/bram_2port.vhd \
   ../../../generic/ProgSRam.vhd \
