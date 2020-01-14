@@ -17,6 +17,7 @@ entity bram_true2p_1clk is
 	(
 		dual_port: boolean := True; -- set to False for single port A
 		pass_thru_a, pass_thru_b: boolean := True;
+		ram_kb: natural := 24; -- KB
 		data_width: natural := 8;
 		addr_width: natural := 6
 	);
@@ -37,7 +38,7 @@ end bram_true2p_1clk;
 architecture rtl of bram_true2p_1clk is
 	-- Build a 2-D array type for the RAM
 	subtype word_t is std_logic_vector((data_width-1) downto 0);
-	type memory_t is array(2**addr_width-1 downto 0) of word_t;
+	type memory_t is array(ram_kb*1024-1 downto 0) of word_t;
 
 	-- Declare the RAM 
 	shared variable ram: memory_t;

@@ -183,7 +183,7 @@ begin
 	computer_module: entity work.orao
 	generic map(
 	  clk_mhz => 25,
-	  ram_kb => 16,
+	  ram_kb => 24,
 	  external_sram => 0,
 	  model => "103"
 	)

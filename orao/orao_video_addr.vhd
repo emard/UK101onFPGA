@@ -197,7 +197,7 @@ begin
 	end generate; -- old bram
 
         B_spi_load: block
-          signal spild_addr: std_logic_vector(13 downto 0);
+          signal spild_addr: std_logic_vector(14 downto 0);
           signal spild_we: std_logic;
           signal spild_dmosi, spild_dmiso: std_logic_vector(7 downto 0);
         begin
@@ -205,13 +205,14 @@ begin
         generic map
         (
           dual_port           => true,
+          ram_kb              => ram_kb,
           data_width          => 8,
-          addr_width          => 14
+          addr_width          => 15
         )
         port map
         (
           clk                 => clk,
-          addr_a(13 downto 0) => cpuAddress(13 downto 0),
+          addr_a(14 downto 0) => cpuAddress(14 downto 0),
           we_a                => not(n_memWR or n_ramCS),
           data_in_a           => cpuDataOut,
           data_out_a          => ramDataOut,
@@ -230,7 +231,7 @@ begin
           mosi => spi_mosi,
           miso => spi_miso,
 
-          ram_addr(13 downto 0) => spild_addr,
+          ram_addr(14 downto 0) => spild_addr,
           ram_we                => spild_we,
           ram_do                => spild_dmosi,
           ram_di                => spild_dmiso
