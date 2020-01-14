@@ -24,38 +24,38 @@ port
   ftdi_rxd: out   std_logic;
   ftdi_txd: in    std_logic;
   -- FTDI additional signaling
-  ftdi_ndsr: inout  std_logic;
-  ftdi_nrts: inout  std_logic;
-  ftdi_txden: inout std_logic;
+  --ftdi_ndsr: inout  std_logic;
+  --ftdi_nrts: inout  std_logic;
+  --ftdi_txden: inout std_logic;
 
   -- UART1 (WiFi serial)
   wifi_rxd: out   std_logic;
   wifi_txd: in    std_logic;
   -- WiFi additional signaling
   wifi_en: inout  std_logic := 'Z'; -- '0' will disable wifi by default
-  wifi_gpio0, wifi_gpio2, wifi_gpio16, wifi_gpio17: inout std_logic := 'Z';
+  wifi_gpio0, wifi_gpio5, wifi_gpio16, wifi_gpio17: inout std_logic := 'Z';
 
   -- ADC MAX11123
-  adc_csn, adc_sclk, adc_mosi: out std_logic;
-  adc_miso: in std_logic;
+  --adc_csn, adc_sclk, adc_mosi: out std_logic;
+  --adc_miso: in std_logic;
 
   -- SDRAM
-  sdram_clk: out std_logic;
-  sdram_cke: out std_logic;
-  sdram_csn: out std_logic;
-  sdram_rasn: out std_logic;
-  sdram_casn: out std_logic;
-  sdram_wen: out std_logic;
-  sdram_a: out std_logic_vector (12 downto 0);
-  sdram_ba: out std_logic_vector(1 downto 0);
-  sdram_dqm: out std_logic_vector(1 downto 0);
-  sdram_d: inout std_logic_vector (15 downto 0);
+  --sdram_clk: out std_logic;
+  --sdram_cke: out std_logic;
+  --sdram_csn: out std_logic;
+  --sdram_rasn: out std_logic;
+  --sdram_casn: out std_logic;
+  --sdram_wen: out std_logic;
+  --sdram_a: out std_logic_vector (12 downto 0);
+  --sdram_ba: out std_logic_vector(1 downto 0);
+  --sdram_dqm: out std_logic_vector(1 downto 0);
+  --sdram_d: inout std_logic_vector (15 downto 0);
 
   -- Onboard blinky
   led: out std_logic_vector(7 downto 0);
   btn: in std_logic_vector(6 downto 0);
-  sw: in std_logic_vector(3 downto 0);
-  oled_csn, oled_clk, oled_mosi, oled_dc, oled_resn: out std_logic;
+  --sw: in std_logic_vector(3 downto 0);
+  --oled_csn, oled_clk, oled_mosi, oled_dc, oled_resn: out std_logic;
 
   -- GPIO
   gp, gn: inout std_logic_vector(27 downto 0);
@@ -67,13 +67,13 @@ port
   audio_l, audio_r, audio_v: inout std_logic_vector(3 downto 0) := (others => 'Z');
 
   -- Onboard antenna 433 MHz
-  ant_433mhz: out std_logic;
+  --ant_433mhz: out std_logic;
 
   -- Digital Video (differential outputs)
-  gpdi_dp, gpdi_dn: out std_logic_vector(3 downto 0);
+  gpdi_dp: out std_logic_vector(3 downto 0);
 
   -- i2c shared for digital video and RTC
-  gpdi_scl, gpdi_sda: inout std_logic;
+  --gpdi_scl, gpdi_sda: inout std_logic;
 
   -- US2 port
   usb_fpga_dp, usb_fpga_dn: inout std_logic;
@@ -88,9 +88,9 @@ port
   --flash_csn    : out     std_logic;
 
   -- SD card (SPI1)
-  sd_dat3_csn, sd_cmd_di, sd_dat0_do, sd_dat1_irq, sd_dat2: inout std_logic;
-  sd_clk: out std_logic;
-  sd_cdn, sd_wp: in std_logic
+  sd_d: inout std_logic_vector(3 downto 0) := (others => 'Z');
+  sd_clk, sd_cmd: inout std_logic := 'Z';
+  sd_cdn, sd_wp: inout std_logic := 'Z'
 );
 end orao_ulx3s;
 
@@ -106,6 +106,8 @@ architecture struct of orao_ulx3s is
 	-- ESP32 ps2tn.py or ps2recv.py
 	alias ps2_clk : std_logic is gp(11);
 	alias ps2_dat : std_logic is gn(11);
+	
+	-- ESP32 SPI loader
 
         component hdmi_oraographdisplay8k is
         port
@@ -136,6 +138,8 @@ architecture struct of orao_ulx3s is
 	signal audio_data : std_logic_vector(17 downto 0);
 	signal S_audio: std_logic_vector(23 downto 0) := (others => '0');
 	signal S_spdif_out: std_logic;
+
+        signal S_csn: std_logic;
 begin
   wifi_gpio0 <= btn(0); -- holding reset for 2 sec will activate ESP32 loader
   reset_n <= btn(0); -- btn(0) has inverted logic so direct to reset_n
@@ -170,24 +174,31 @@ begin
     );
 
     orao_computer: if test = '0' generate
+        -- disable SD card by pullup
+        sd_d(3) <= 'Z';
+        S_csn <= not wifi_gpio5; -- not wifi LED
         -- pullups required for PS/2
         usb_fpga_pu_dp <= '1';
         usb_fpga_pu_dn <= '1';
 	computer_module: entity work.orao
 	generic map(
 	  clk_mhz => 25,
-	  ram_kb => 24,
+	  ram_kb => 16,
 	  external_sram => 0,
-	  model => "102"
+	  model => "103"
 	)
 	port map(
                 clk       => clk_pixel,
                 n_reset   => reset_n,
 		txd       => open, -- ftdi_rxd,
 		rxd       => '1',  -- ftdi_txd,
-		rts       => ftdi_nrts,
+		rts       => open, -- ftdi_nrts,
 		ps2Clk    => ps2_clk,
 		ps2Data   => ps2_dat,
+		spi_csn   => S_csn,
+		spi_sclk  => wifi_gpio16,
+		spi_mosi  => sd_d(1),  -- wifi_gpio4
+		spi_miso  => sd_d(2),  -- wifi_gpio12
 		key_enter => btn(6),
 		key_b     => btn(3),
 		key_c     => btn(4),
@@ -234,13 +245,9 @@ begin
 
   -- vendor specific DDR modules
   -- convert SDR 2-bit input to DDR clocked 1-bit output (single-ended)
-  ddr_clock: ODDRX1F port map (D0=>dvid_clock(0), D1=>dvid_clock(1), Q=>ddr_d(3), SCLK=>clk_pixel_shift, RST=>'0');
-  ddr_red:   ODDRX1F port map (D0=>dvid_red(0),   D1=>dvid_red(1),   Q=>ddr_d(2), SCLK=>clk_pixel_shift, RST=>'0');
-  ddr_green: ODDRX1F port map (D0=>dvid_green(0), D1=>dvid_green(1), Q=>ddr_d(1), SCLK=>clk_pixel_shift, RST=>'0');
-  ddr_blue:  ODDRX1F port map (D0=>dvid_blue(0),  D1=>dvid_blue(1),  Q=>ddr_d(0), SCLK=>clk_pixel_shift, RST=>'0');
-  -- vendor specific modules for differential output
-  gpdi_data_channels: for i in 0 to 3 generate
-    gpdi_diff_data: OLVDS port map (A => ddr_d(i), Z => gpdi_dp(i), ZN => gpdi_dn(i));
-  end generate;
+  ddr_clock: ODDRX1F port map (D0=>dvid_clock(0), D1=>dvid_clock(1), Q=>gpdi_dp(3), SCLK=>clk_pixel_shift, RST=>'0');
+  ddr_red:   ODDRX1F port map (D0=>dvid_red(0),   D1=>dvid_red(1),   Q=>gpdi_dp(2), SCLK=>clk_pixel_shift, RST=>'0');
+  ddr_green: ODDRX1F port map (D0=>dvid_green(0), D1=>dvid_green(1), Q=>gpdi_dp(1), SCLK=>clk_pixel_shift, RST=>'0');
+  ddr_blue:  ODDRX1F port map (D0=>dvid_blue(0),  D1=>dvid_blue(1),  Q=>gpdi_dp(0), SCLK=>clk_pixel_shift, RST=>'0');
 
 end struct;

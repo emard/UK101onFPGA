@@ -43,6 +43,10 @@ entity orao is
 		sram_wel, sram_lbl, sram_ubl: out std_logic; -- onboard external SRAM
 		sram_a          : out std_logic_vector(18 downto 0);
 		sram_d          : inout std_logic_vector(15 downto 0); 
+		spi_csn         : in std_logic; -- := '1';
+		spi_sclk        : in std_logic; -- := '0';
+		spi_mosi        : in std_logic; -- := '0';
+		spi_miso        : inout std_logic;
 		key_b           : in std_logic;
 		key_c           : in std_logic;
 		key_enter       : in std_logic;
@@ -175,6 +179,8 @@ begin
 	);
 
         inst_internal_bram: if external_sram = 0 generate
+
+        G_old_bram: if false generate
 	u3: entity work.bram_1port
 	generic map(
 	  C_mem_size => ram_kb
@@ -188,6 +194,48 @@ begin
 		rw_port_data_in => cpuDataOut,
 		rw_port_data_out => ramDataOut
 	);
+	end generate; -- old bram
+
+        B_spi_load: block
+          signal spild_addr: std_logic_vector(13 downto 0);
+          signal spild_we: std_logic;
+          signal spild_dmosi, spild_dmiso: std_logic_vector(7 downto 0);
+        begin
+        E_bram_true2p_1clk: entity work.bram_true2p_1clk
+        generic map
+        (
+          dual_port           => true,
+          data_width          => 8,
+          addr_width          => 14
+        )
+        port map
+        (
+          clk                 => clk,
+          addr_a(13 downto 0) => cpuAddress(13 downto 0),
+          we_a                => not(n_memWR or n_ramCS),
+          data_in_a           => cpuDataOut,
+          data_out_a          => ramDataOut,
+          addr_b              => spild_addr,
+          we_b                => spild_we,
+          data_in_b           => spild_dmosi,
+          data_out_b          => spild_dmiso
+        );
+        E_spi_ram_slave: entity work.spi_ram_slave
+        port map
+        (
+          clk  => clk,
+
+          csn  => spi_csn,
+          sclk => spi_sclk,
+          mosi => spi_mosi,
+          miso => spi_miso,
+
+          ram_addr(13 downto 0) => spild_addr,
+          ram_we                => spild_we,
+          ram_do                => spild_dmosi,
+          ram_di                => spild_dmiso
+        );
+        end block;
 	end generate;
 
         inst_external_sram: if external_sram = 1 generate

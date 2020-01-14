@@ -62,6 +62,7 @@ VHDL_FILES = \
   ../../../rtl_emard/vga/hdmi/vga2dvid.vhd \
   ../../../rtl_emard/vga/hdmi/tmds_encoder.vhd \
   ../../../rtl_emard/spdif/spdif_tx.vhd \
+  ../../../rtl_emard/spi_ram/spi_ram_slave.vhd \
 
 #  ../../../rtl_emard/vga/hdmi_out.vhd \
 #  ../../../rtl_emard/vga/hdmi/ddr_dvid_out_se.vhd \
