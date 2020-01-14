@@ -184,6 +184,7 @@ begin
 	generic map(
 	  clk_mhz => 25,
 	  ram_kb => 24,
+	  spi_load => 1,
 	  external_sram => 0,
 	  model => "103"
 	)

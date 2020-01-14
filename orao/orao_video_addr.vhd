@@ -28,6 +28,7 @@ entity orao is
         generic (
           model : string := "102";
           ram_kb: integer := 24; -- KB RAM this computer will have
+          spi_load: integer := 0; -- 0-normal RAM, 1-SPI-loadable RAM
           external_sram : integer := 0; -- 0: on-chip internal BRAM  1: external SRAM
           clk_mhz : integer := 25; -- clock freq in MHz
           serial_baud : integer := 9600 -- output serial baudrate
@@ -180,7 +181,7 @@ begin
 
         inst_internal_bram: if external_sram = 0 generate
 
-        G_old_bram: if false generate
+        G_normal_bram: if spi_load = 0 generate
 	u3: entity work.bram_1port
 	generic map(
 	  C_mem_size => ram_kb
@@ -194,8 +195,9 @@ begin
 		rw_port_data_in => cpuDataOut,
 		rw_port_data_out => ramDataOut
 	);
-	end generate; -- old bram
+	end generate; -- normal bram
 
+        G_spi_load: if spi_load = 1 generate
         B_spi_load: block
           signal spild_addr: std_logic_vector(14 downto 0);
           signal spild_we: std_logic;
@@ -207,7 +209,9 @@ begin
           dual_port           => true,
           ram_kb              => ram_kb,
           data_width          => 8,
-          addr_width          => 15
+          addr_width          => 15,
+          pass_thru_a         => false,
+          pass_thru_b         => false
         )
         port map
         (
@@ -237,7 +241,8 @@ begin
           ram_di                => spild_dmiso
         );
         end block;
-	end generate;
+        end generate; -- spi loader
+	end generate; -- internal bram
 
         inst_external_sram: if external_sram = 1 generate
 	u3: entity work.ProgSRam 
