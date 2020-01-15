@@ -58,6 +58,13 @@ For boulder, this is the final procedure, others may vary:
     wine tap2bin.exe boulder.tap
     dd if=file1.bin of=boulder1024_lnk5768.bin bs=1 skip=258
 
+or even directly from TAP file, (without tap2bin tool),
+we can get the same result:
+
+    dd if=boulder.tap of=boulder1024_lnk5768 bs=1 skip=1996
+
+Upload it to ESP32
+
     ftp> put boulder1024_lnk5768.bin
 
 On ESP32
