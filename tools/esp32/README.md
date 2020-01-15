@@ -1,8 +1,12 @@
 # ESP32
 
+On ESP32
+
+    import uftpd
+
 On linux
 
-    replcmd --host=192.168.4.1 -p 1234 put boulder1024_lnk5768.bin boulder1024_lnk5768.bin
+    ftp> put boulder1024_lnk5768.bin
 
 On ESP32
 
@@ -15,7 +19,9 @@ On linux
 
 On ORAO
 
-    bc<enter><enter><enter>
+    BC<enter>
+    <enter>
+    <enter>
 
 On ESP32
 
@@ -25,3 +31,11 @@ On ORAO
 
     LNK 5768
 
+"Boulder" game should start
+
+    <enter> start gate
+    H enter level
+    1 up
+    Q down
+    Š left
+    Đ right
