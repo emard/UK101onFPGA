@@ -12,13 +12,16 @@ On ESP32
 On linux
 
     ./linux_keyboard.py (edit IP address)
+
+On ORAO
+
     bc<enter><enter><enter>
 
 On ESP32
 
     spiram.load("boulder1024_lnk5768.bin",1024)
 
-On ESP32
+On ORAO
 
-    lnk5768
+    LNK 5768
 
