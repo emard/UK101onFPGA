@@ -8,7 +8,7 @@ On linux we should prepare a RAW binary file which
 is ORAO RAM content.
 
 Download ["Boulder Dash" TAP file](http://retrospec.sgn.net/users/tomcat/yu/Orao_list.php)
-and split it into separate TAP files 
+and split it into separate fileX.bin files 
 using [tap2bin tool](http://www.deltasoft.com.hr/retro/oraoutil.htm).
 
 Analyze the content - ORAO first file loads by default at 0x400.
