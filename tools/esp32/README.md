@@ -10,11 +10,13 @@ is ORAO RAM content.
 Download ["Boulder" TAP file](http://retrospec.sgn.net/users/tomcat/yu/Orao_list.php)
 Split it into separate TAP files using [tap2bin tool](http://www.deltasoft.com.hr/retro/oraoutil.htm)
 
-Analyze the content - ORAO first file loads at 0x400, if BASIC it will start
-with 0x20, and have some ASCII numbers that follow, probably representing
-number of bytes. This file then may load second file, using LMEM
-"FILENAME",OFFSET whre FILENAME and OFFSET are optional parameters in human-readable
-ASCII, default FILENAME="" and OFFSET=1024 if unspecified.
+Analyze the content - ORAO first file loads by default at 0x400.
+BASIC file typically starts with 0x20, and has some ASCII numbers
+that follow, probably representing number of bytes.
+First file then may load second file, using LMEM
+"FILENAME",OFFSET where FILENAME and OFFSET are optional
+parameters in human-readable ASCII,
+default FILENAME="" and OFFSET=1024 if unspecified.
 Also it can then execute machine code using LNK START, where START
 is human-readable parameter visible as ASCII string in hexdump,
 
