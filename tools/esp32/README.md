@@ -10,9 +10,9 @@ is ORAO RAM content.
 Download ["Boulder" TAP file](http://retrospec.sgn.net/users/tomcat/yu/Orao_list.php)
 Split it into separate TAP files using [tap2bin tool](http://www.deltasoft.com.hr/retro/oraoutil.htm)
 
-Analyze the content - ORAO first file loads at 0x400, it starts with 0x20,
-has some ASCII characters that follow, probably representing number of bytes.
-This file then may load second file, using LMEM "filename",offset command
+Analyze the content - ORAO first file loads at 0x400, if BASIC it will start
+with 0x20, and have some ASCII numbers that follow, probably representing
+number of bytes. This file then may load second file, using LMEM "filename",offset command
 where "filename" and "offset" are optional parameters in human-readable
 ASCII, default filename="" and offset=1024 if unspecified.
 Also it can then execute machine code using LNK start. start
