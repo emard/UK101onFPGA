@@ -7,8 +7,9 @@ On ESP32
 On linux we should prepare a RAW binary file which
 is ORAO RAM content.
 
-Download ["Boulder" TAP file](http://retrospec.sgn.net/users/tomcat/yu/Orao_list.php)
-Split it into separate TAP files using [tap2bin tool](http://www.deltasoft.com.hr/retro/oraoutil.htm)
+Download ["Boulder Dash" TAP file](http://retrospec.sgn.net/users/tomcat/yu/Orao_list.php)
+and split it into separate TAP files 
+using [tap2bin tool](http://www.deltasoft.com.hr/retro/oraoutil.htm).
 
 Analyze the content - ORAO first file loads by default at 0x400.
 BASIC file typically starts with 0x20, and has some ASCII numbers
