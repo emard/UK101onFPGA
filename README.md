@@ -143,6 +143,8 @@ on screen:
     23534 BYTES FREE
     _
 
+For loading some file into ORAO RAM using ESP32 at ULX3S board,
+read this [ESP32 ORAO SPI RAM loading](/tools/esp32)
 
 # ORAO 32K RAM 256x256 screen Scarab Hardware miniSpartan6+ xilinx XC6SLX25
 
