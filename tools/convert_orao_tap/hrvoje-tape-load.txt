@@ -1,0 +1,55 @@
+On Tue, Mar 03, 2020 at 01:08:36PM +0100, D EMARD wrote:
+> Pa nemam nego ako je prije radilo a sad ne radi
+> MISTer developer je očito mijenjao zajedničke dijelove
+> i pritom malo nešto strgao
+>
+> ORAO ima i neke zaštite na tape tako da ja samo
+> boulder dash na svom ulx3s emulatoru (koji je neovisan od misterovog)
+> mogu pokrenut. Raspakiram binary onaj zadnji dio bouldera tako da opće ne čitam
+> s trake nego ga samo napunim memoriju s DMA
+>  i sa nekim LNK ga startam. Taj LNK piše u basicu kratkom koji bi
+> se s trake učitao prije tog velikog dijela.
+>
+> Invadersi (ako ih tako sa DMA) oni se startaju na par sekundi i zablokiraju.
+> očito imaju zaštitu od jednostavnog presnimavanja
+
+Bok Davore!
+
+Stvarno sam azuran s odgovorima, ali lude stvari se dogadjaju oko nas
+pa jedva stizem sve pratiti.
+
+Uspio sam popraviti Orao ucitavanje... i dalje ne znam sto su
+misterovci potrgali u userlandu, sram ih bilo! :)
+
+Dakle prije nego zaboravim da ti dokumentiram kako radi rutina - na
+traci je zapis podataka u Manchester encodingu i mislim da je jedinica
+dugacka a nula kratka. Kad je dekoder adrese na adresnoj sabirnici
+vidio 0x87ff, na podatkovnu je spojio latch kojeg puni komparator (i
+to mislim na D7) i to je to. Rutina je mjerila trajanje i odlucivala
+radi li se o nuli ili jedinici.
+
+Prekrojio sam ucitavanje na nacin da se sad .tap (ne vise wav) ucita u
+neki privremeni buffer u ramu i od tamo ga cita orao loader.  Kad god on
+zatrazi adresu 0x87ff dobije bit koji bi vidio s kazete...
+
+Ovako nekako:
+
+ if (addr == 16'h87ff && old_read_addr != 16'h87ff) begin
+   read_counter <= read_counter + (tape_buf_out[read_counter[8:6]] ? 32'd1 : 32'd2);
+ end
+
+ if(addr == 16'h87ff) begin                                       
+    data_out <= read_counter[5] ? 8'hff : 8'h00;
+ end
+
+Svaki bajt se ucitava tako da se prvo gleda LSB bit pa prema MSB. Definiras
+neki veliki brojac (tipa 32 bita) i onda ga povecavas kad god dodje novi
+zahtjev za pristupom 0x87ff, ako je bit 0 povecavas brojac za 2, ako je 1
+povecavas ga za 1. Kad nabrojis 32 ili 64 uzastopna citanja (ovisi o
+vrijednosti koju se cita) ides na iduci bit. Kao izlaz prema Orlu ispucavas sve
+jedinice ili sve nule na podatkovnu sabirnicu ovisno o 6-om bitu brojaca. Kad
+odradis svih 8 bitova, ides na iduci bajt i to je to!
+
+Javi jel radi :)
+
+Hrvoje
