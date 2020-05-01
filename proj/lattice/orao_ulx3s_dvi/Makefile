@@ -56,14 +56,15 @@ VHDL_FILES = \
   ../../../Components/PS2KB/orao_keyboard_buttons.vhd \
   ../../../Components/UART/bufferedUART.vhd \
   ../../../rtl_emard/generic/bram_true2p_1clk.vhd \
-  ../../../rtl_emard/osd/osd.vhd \
-  ../../../rtl_emard/osd/char_rom.vhd \
   ../../../rtl_emard/vga/vga.vhd \
   ../../../rtl_emard/vga/hdmi/vga2dvid.vhd \
   ../../../rtl_emard/vga/hdmi/tmds_encoder.vhd \
   ../../../rtl_emard/spdif/spdif_tx.vhd \
   ../../../rtl_emard/spi_ram/spi_ram_slave.vhd \
 
+#  ../../../orao/orao_video_addr.vhd \
+#  ../../../rtl_emard/osd/osd.vhd \
+#  ../../../rtl_emard/osd/char_rom.vhd \
 #  ../../../rtl_emard/vga/hdmi_out.vhd \
 #  ../../../rtl_emard/vga/hdmi/ddr_dvid_out_se.vhd \
 #  ../../../rtl_emard/vga/lattice/ecp5u/ddr_out.vhd \
