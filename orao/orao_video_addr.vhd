@@ -128,10 +128,10 @@ begin
 		
 	u1 : entity work.T65
 	port map(
-		Enable => '1',
+		Enable => cpuClock,
 		Mode => "00",
 		Res_n => n_reset,
-		Clk => cpuClock,
+		Clk => clk,
 		Rdy => '1',
 		Abort_n => '1',
 		IRQ_n => '1',
@@ -286,14 +286,16 @@ begin
 		if rising_edge(clk) then
 			if cpuClkCount < clk_mhz-1 then
 				cpuClkCount <= cpuClkCount + 1;
-			else
-				cpuClkCount <= (others=>'0');
-			end if;
-			if cpuClkCount < clk_mhz/2-1 then
 				cpuClock <= '0';
 			else
+				cpuClkCount <= (others=>'0');
 				cpuClock <= '1';
-			end if;	
+			end if;
+			--if cpuClkCount < clk_mhz/2-1 then
+			--	cpuClock <= '0';
+			--else
+			--	cpuClock <= '1';
+			--end if;
 			
 			if serialClkCount < 1000000*clk_mhz/(serial_baud*16)-1 then
 				serialClkCount <= serialClkCount + 1;
