@@ -16,11 +16,9 @@ from uctypes import addressof
 
 class spiram:
   def __init__(self):
-    self.led = Pin(5, Pin.OUT)
+    self.led = Pin(5,Pin.OUT)
     self.led.off()
-    self.rom="48.rom"
-    #self.rom="opense.rom"
-    #self.rom="/sd/zxspectrum/48.rom"
+    self.rom="crt103.rom"
     self.spi_channel = const(2)
     self.init_pinout_sd()
     self.spi_freq = const(4000000)
@@ -70,6 +68,63 @@ class spiram:
 
   def cpu_continue(self):
     self.ctrl(0)
+    
+  def store_rom(self,length=32):
+    self.stored_rom=bytearray(length)
+    self.led.on()
+    self.hwspi.write(bytearray([1, 0,0,(self.code_addr>>8)&0xFF,self.code_addr&0xFF, 0]))
+    self.hwspi.readinto(self.stored_rom)
+    self.led.off()
+    self.stored_vector=bytearray(2)
+    self.led.on()
+    self.hwspi.write(bytearray([1, 0,0,(self.vector_addr>>8)&0xFF,self.vector_addr&0xFF, 0]))
+    self.hwspi.readinto(self.stored_rom)
+    self.led.off()
+
+  def restore_rom(self):
+    self.led.on()
+    self.hwspi.write(bytearray([0, 0,0,(self.code_addr>>8)&0xFF,self.code_addr&0xFF]))
+    self.hwspi.write(self.stored_rom)
+    self.led.off()
+    self.led.on()
+    self.hwspi.write(bytearray([0, 0,0,(self.vector_addr>>8)&0xFF,self.vector_addr&0xFF]))
+    self.hwspi.readinto(self.stored_vector)
+    self.led.off()
+
+  def patch_rom(self,header):
+    # header = 0:X 1:Y 2:P 3:A 4-5:PC 6:SP
+    # overwrite tape saving code in original ROM
+    # with register restore code
+    self.led.on()
+    self.hwspi.write(bytearray([0, 0,0,(self.vector_addr>>8)&0xFF,self.vector_addr&0xFF, self.code_addr&0xFF, (self.code_addr>>8)&0xFF])) # overwrite reset vector at 0xFFFC
+    self.led.off()
+    self.led.on()
+    self.hwspi.write(bytearray([0, 0,0,(self.code_addr>>8)&0xFF,self.code_addr&0xFF])) # overwrite code
+    self.hwspi.write(bytearray([0x78,0xA2,header[6],0x9A,0xA2,header[0],0xA0,header[1],0xA9,header[2],0x48,0x28,0xA9,header[3],0x4C,header[4],header[5]]))
+    self.led.off()
+    self.led.on()
+
+  def loadorao(self,filename):
+    z=open(filename,"rb")
+    header=bytearray(7)
+    z.readinto(header)
+    self.cpu_halt()
+    self.load_stream(z,0)
+    self.code_addr=0xE000
+    self.vector_addr=0xFFFC
+    self.store_rom(32)
+    self.patch_rom(header)
+    self.ctrl(3) # reset and halt
+    self.ctrl(1) # only reset
+    self.cpu_continue()
+    # restore original ROM after image starts
+    self.cpu_halt()
+    self.restore_rom()
+    self.cpu_continue() # release reset
+
+def loadorao(filename):
+  s=spiram()
+  s.loadorao(filename)
 
 def load(filename, addr=0):
   s=spiram()
