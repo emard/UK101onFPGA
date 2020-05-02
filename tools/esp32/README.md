@@ -1,5 +1,7 @@
 # ESP32
 
+This works for orao64 (Makefile64k)
+
 On ESP32
 
     import uftpd
