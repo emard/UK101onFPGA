@@ -1,0 +1,23 @@
+;apt-get install xa65
+;xa restore.xa; hexdump -v -e '/1 "0x%02X,"' a.o65
+
+; flags restored using stack
+; must push value on stack and plp
+
+; disable interrupts
+sei
+; restore stack pointer using X
+ldx #$55
+txs
+; restore X
+ldx #$11
+; restore Y
+ldy #$22
+; restore flags using A and stack
+lda #$FF
+pha
+plp
+; restore A
+lda #$AA
+; final JMP
+jmp $ABCD
