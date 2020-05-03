@@ -2,6 +2,17 @@
 
 This works for orao64 (Makefile64k)
 
+# Comfortable way
+
+If you have a collection of "*.orao" snapshots
+copy to SD card "osd.py", "ld_orao.py", 
+"ecp5.py" (from esp32ecp5) and orao bitstream.
+
+    import osd
+
+Press all 4 direction buttons, OSD will appear.
+Navigate to "*.orao" file or another bitstream.
+
 
 # Easy way
 
