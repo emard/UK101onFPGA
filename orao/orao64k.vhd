@@ -26,6 +26,7 @@ port
   vga_hsync,
   vga_vsync,
   vga_blank     : out   std_logic;
+  beep          : out   std_logic;
   spi_csn       : in    std_logic; -- := '1';
   spi_sclk      : in    std_logic; -- := '0';
   spi_mosi      : in    std_logic; -- := '0';
@@ -57,6 +58,7 @@ architecture struct of orao64k is
 	signal n_basRomCS               : std_logic;
 	signal n_monitorRomCS           : std_logic;
 	signal n_aciaCS                 : std_logic;
+	signal n_beepCS                 : std_logic;
 	signal n_kbCS			: std_logic;
 	
 	signal dispDataB                : std_logic_vector(7 downto 0);
@@ -95,6 +97,8 @@ architecture struct of orao64k is
 
 	signal S_vga_rgb: std_logic_vector(7 downto 0);
 	signal S_vga_video, S_vga_hsync, S_vga_vsync, S_vga_blank: std_logic;
+	
+	signal R_beep: std_logic;
 begin
 
 	n_memWR <= not(cpuClock) nand (not n_WR);
@@ -112,6 +116,7 @@ begin
 	n_basRomCS     <= '0' when cpuAddress(15 downto 13) = "110" else '1'; --8k @ 0xC000
 	n_monitorRomCS <= '0' when cpuAddress(15 downto 13) = "111" else '1'; --8K @ 0xE000
 	n_ramCS        <= '0' when conv_integer(cpuAddress(15 downto 12)) < ram_kb/4 else '1';
+	n_beepCS       <= '0' when cpuAddress(15 downto 0) = x"8800" else '1';
 	n_aciaCS       <= '0' when cpuAddress(15 downto 1) = x"880" & "000" else '1';
 	n_kbCS         <= '0' when cpuAddress(15 downto 11) = x"8" & "0" else '1';
  
@@ -270,6 +275,16 @@ begin
 		A	  => cpuAddress(10 downto 0),
 		Q	  => kbReadData
 	);
+
+        process(clk)
+        begin
+          if rising_edge(clk) then
+            if cpuClock='1' and n_beepCS='0' then
+              R_beep <= not R_beep;
+            end if;
+          end if;
+        end process;
+        beep <= R_beep;
 
 	videochip: entity work.hdmi_oraographdisplay8k_vhd
 	port map

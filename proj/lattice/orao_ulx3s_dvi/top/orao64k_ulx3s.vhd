@@ -119,6 +119,7 @@ architecture struct of orao64k_ulx3s is
 	signal dvid_red, dvid_green, dvid_blue, dvid_clock: std_logic_vector(1 downto 0);
 
         signal S_csn, S_btn_irq: std_logic;
+        signal S_beep: std_logic;
 begin
   wifi_gpio0 <= not S_btn_irq; -- holding reset for 2 sec will activate ESP32 loader
   reset_n <= btn(0); -- btn(0) has inverted logic so direct to reset_n
@@ -162,6 +163,7 @@ begin
 		key_enter => btn(6),
 		key_b     => btn(3),
 		key_c     => btn(4),
+		beep      => S_beep,
 		vga_r     => S_vga_r,
 		vga_g     => S_vga_g,
 		vga_b     => S_vga_b,
@@ -169,6 +171,11 @@ begin
                 vga_vsync => S_vga_vsync,
                 vga_blank => S_vga_blank
 	);
+  
+  audio_l(3 downto 1) <= (others => '0');
+  audio_l(0) <= S_beep;
+  audio_r(3 downto 1) <= (others => '0');
+  audio_r(0) <= S_beep;
 
   vga2dvi_converter: entity work.vga2dvid
   generic map
