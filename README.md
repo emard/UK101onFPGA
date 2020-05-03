@@ -15,6 +15,11 @@ ORAO was created as an upgrade of GALEB with
 GALEB has been also known as YU101.
 YU101 was similar to UK101.
 
+# ULX3S
+
+Most comfortable loading of bitstreams from SD card
+is done with [Onboard ESP32 OSD loader](/tools/esp32)
+
 # Connecting
 
 The emulator generates PAL 50Hz composite video signal
