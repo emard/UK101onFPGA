@@ -8,8 +8,8 @@ If you have a collection of "*.orao" snapshots
 copy them anywhere to SD card.
 Read "Easy way" below on how to produce snapshots.
 Copy to root of SD card "osd.py", "ld_orao.py", 
-"ecp5.py" (from esp32ecp5) and orao bitstream to
-"/sd/orao/bitstreams/ulx3s_12f_orao.bit"
+"ecp5.py" (from esp32ecp5) and orao bitstream compiled
+with Makefile64k to "/sd/orao/bitstreams/ulx3s_12f_orao.bit"
 
     import osd
 
