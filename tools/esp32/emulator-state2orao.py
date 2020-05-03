@@ -12,6 +12,8 @@ import json
 with open('emulator-state.bin') as json_file:
   s = json.load(json_file)
   f = open("snapshot.orao","wb")
-  f.write(struct.pack("<BBBBHB",s["x"],s["y"],s["flags"],s["a"],s["pc"],s["sp"]))
+  header = "ORAO_0AXYPS_PC_ADDR_LEN_DATA\0"
+  f.write(header.encode("utf-8"))
+  f.write(struct.pack("<BBBBBHHH",s["a"],s["x"],s["y"],s["flags"],s["sp"],s["pc"],0,0))
   f.write(bytearray(s["memory"]))
   f.close()

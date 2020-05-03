@@ -91,36 +91,48 @@ class spiram:
     self.hwspi.write(self.stored_vector)
     self.led.off()
 
-  def patch_rom(self,header):
-    # header = 0:X 1:Y 2:P 3:A 4-5:PC 6:SP
-    # overwrite tape saving code in original ROM
-    # with register restore code
+  def patch_rom(self,regs):
+    # regs   = 0:A 1:X 2:Y 3:P 4:S 5-6:PC
+    # overwrite with register restore code
     self.led.on()
     self.hwspi.write(bytearray([0, 0,0,(self.vector_addr>>8)&0xFF,self.vector_addr&0xFF, self.code_addr&0xFF, (self.code_addr>>8)&0xFF])) # overwrite reset vector at 0xFFFC
     self.led.off()
     self.led.on()
     self.hwspi.write(bytearray([0, 0,0,(self.code_addr>>8)&0xFF,self.code_addr&0xFF])) # overwrite code
-    self.hwspi.write(bytearray([0x78,0xA2,header[6],0x9A,0xA2,header[0],0xA0,header[1],0xA9,header[2],0x48,0x28,0xA9,header[3],0x4C,header[4],header[5]]))
+    self.hwspi.write(bytearray([0x78,0xA2,regs[4],0x9A,0xA2,regs[1],0xA0,regs[2],0xA9,regs[3],0x48,0x28,0xA9,regs[0],0x4C,regs[5],regs[6]]))
     self.led.off()
     self.led.on()
 
   def loadorao(self,filename):
     z=open(filename,"rb")
-    header=bytearray(7)
+    expect=bytearray("ORAO_0AXYPS_PC_ADDR_LEN_DATA\0")
+    header=bytearray(len(expect))
     z.readinto(header)
-    self.cpu_halt()
-    self.load_stream(z,0)
-    self.code_addr=0xE000
-    self.vector_addr=0xFFFC
-    self.store_rom(32)
-    self.patch_rom(header)
-    self.ctrl(3) # reset and halt
-    self.ctrl(1) # only reset
-    self.cpu_continue()
-    # restore original ROM after image starts
-    self.cpu_halt()
-    self.restore_rom()
-    self.cpu_continue() # release reset
+    if header==expect:
+      del expect,header
+      regs=bytearray(11)
+      z.readinto(regs)
+      addr=unpack("<H",regs[7:9])[0]
+      length=unpack("<H",regs[9:11])[0]
+      if length==0:
+        length=0x10000
+      self.cpu_halt()
+      self.load_stream(z,addr,length)
+      self.code_addr=0xE000
+      self.vector_addr=0xFFFC
+      self.store_rom(32)
+      self.patch_rom(regs)
+      self.ctrl(3) # reset and halt
+      self.ctrl(1) # only reset
+      self.cpu_continue()
+      # restore original ROM after image starts
+      self.cpu_halt()
+      self.restore_rom()
+      self.cpu_continue() # release reset
+    else:
+      print("unrecognized header")
+      print("header:", header)
+      print("expected:", expect)
 
 def loadorao(filename):
   s=spiram()
