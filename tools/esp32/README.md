@@ -2,6 +2,44 @@
 
 This works for orao64 (Makefile64k)
 
+
+# Easy way
+
+Run [online ORAO emulator](http://orao.hrvoje.org) and load something e.g.
+
+    LMEM "MMINER"
+
+click "Save emulator state" at the bottom of web page,
+about 4MB json file "emulator-state.bin" will be saved locally.
+For ESP32 it has to be coverted to short binary form:
+
+    ./emulator-state2orao2.py
+
+A 64K file "snapshot.orao" will be created. Copy it to ESP32 and:
+
+    import spiram
+    spiram.loadorao("snapshot.orao")
+
+It should start immediately.
+
+
+# Medium way
+
+Suppose you obtain some raw orao binary file "boulder1024_lnk5768.bin"
+which should be loaded from offset 1024 and jumped to 5768.
+Convert it to orao snapshot
+
+    ./code2orao.py
+
+A file "snapshot.orao" will be created,
+use it as described above.
+
+Edit "code2orao.py" to change offset, jump address and initial
+register values.
+
+
+# Hard way
+
 On ESP32
 
     import uftpd
