@@ -160,9 +160,9 @@ begin
 		spi_miso  => sd_d(2),  -- wifi_gpio12
 		btn_irq   => S_btn_irq,
 		btn       => btn,
-		key_enter => btn(6),
-		key_b     => btn(3),
-		key_c     => btn(4),
+		key_enter => '0', -- btn(6),
+		key_b     => '0', -- btn(3),
+		key_c     => '0', -- btn(4),
 		beep      => S_beep,
 		vga_r     => S_vga_r,
 		vga_g     => S_vga_g,
